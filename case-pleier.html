@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PLEIER – Katja</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #0E0F14; color: #fff; }
+
+    .case { max-width: 1080px; margin: 0 auto; padding: 0 48px 80px; }
+
+    .case-header { padding-top: 120px; padding-bottom: 48px; }
+    .case-hero-text {
+      font-size: clamp(32px, 4.5vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      color: #fff;
+      max-width: 900px;
+    }
+
+    .case-meta-row { display: flex; flex-direction: column; gap: 0; margin-top: 32px; }
+    .case-meta-item { display: flex; align-items: baseline; gap: 16px; padding: 10px 0; }
+    .case-meta-label { font-size: 13px; font-weight: 400; color: #666; width: 140px; flex-shrink: 0; }
+    .case-meta-value { font-size: 13px; font-weight: 400; color: #fff; }
+
+    .case-img {
+      width: 100%;
+      margin-top: 48px;
+    }
+    .case-img img {
+      width: 100%;
+      display: block;
+      border-radius: 0;
+    }
+
+    .case-img-placeholder {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #1a1b22;
+      border-radius: 0;
+      margin-top: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .case-img-placeholder span { font-size: 14px; font-weight: 400; color: #bbb; }
+
+    .case-statement {
+      font-size: 24px;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      line-height: 1.4;
+      color: #fff;
+      margin-top: 48px;
+      max-width: 860px;
+    }
+
+    .case-section { margin-top: 48px; }
+    .case-section-body {
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: #aaa;
+      max-width: 720px;
+    }
+
+    .case-footer { padding: 40px 48px; text-align: center; }
+    .case-footer p { font-size: 13px; font-weight: 300; color: #555; }
+  </style>
+</head>
+
+<body>
+
+  <!-- ─── Header ──────────────────────────────────────────────────── -->
+  <header style="position:fixed; top:0; left:0; right:0; z-index:50; padding:24px 48px; display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0); transition:background 300ms ease;" id="site-header">
+    <div>
+      <a href="index.html" style="font-size:16px; font-weight:500; color:#fff; text-decoration:none; transition:color 200ms ease;" onmouseenter="this.style.color='#0914E2'" onmouseleave="this.style.color='#fff'">← Back</a>
+    </div>
+    <div>
+      <a href="https://tally.so/r/VLQD1l" target="_blank" style="display:inline-flex; align-items:center; justify-content:center; height:48px; padding:0 32px; border:none; border-radius:9999px; font-size:16px; font-weight:500; color:#000; text-decoration:none; background:#FDC8D8; transition:background 200ms ease;" onmouseenter="this.style.background='#0914E2';this.style.color='#fff'" onmouseleave="this.style.background='#FDC8D8';this.style.color='#000'">Work with me</a>
+    </div>
+  </header>
+
+  <!-- ─── Case Study ──────────────────────────────────────────────── -->
+  <div class="case">
+
+    <!-- Hero -->
+    <div class="case-header">
+      <h1 class="case-hero-text">Pleier - audio app for Postimees, one of the largest media groups in the Baltics.</h1>
+      <div class="case-meta-row">
+        <div class="case-meta-item">
+          <span class="case-meta-label">Type</span>
+          <span class="case-meta-value">Lifestyle, Mobile App, Design Systems</span>
+        </div>
+        <div class="case-meta-item">
+          <span class="case-meta-label">Role</span>
+          <span class="case-meta-value">Product Designer</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-img">
+      <img src="case studies/pleier/pleier1.jpg" alt="PLEIER hero">
+    </div>
+
+    <p class="case-statement">Postimees Group brings together dozens of radio stations, podcasts, and media projects.</p>
+
+    <div class="case-section">
+      <p class="case-section-body">The content was scattered across different platforms and apps. PLEIER became the single entry point: live broadcasts, show archives, and podcasts from the entire group in one place.</p>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:48px;">
+      <img src="case studies/pleier/pleier2.jpg" alt="PLEIER" style="width:100%; display:block; border-radius:0;">
+      <img src="case studies/pleier/pleier3.jpg" alt="PLEIER" style="width:100%; display:block; border-radius:0;">
+    </div>
+
+    <div class="case-section">
+      <p class="case-section-body">Full product design from scratch in collaboration with a product manager. The work included user flow research, wireframes, final interface in light and dark mode, and a design system that keeps everything consistent across the product and makes future development easier.</p>
+    </div>
+
+    <div class="case-section">
+      <p class="case-section-body">The app needed to work equally well for two very different use cases. Passive background listening to live radio, and active search for a specific podcast or episode.</p>
+    </div>
+
+    <div class="case-img">
+      <img src="case studies/pleier/pleier4.jpg" alt="PLEIER">
+    </div>
+
+    <div class="case-img">
+      <img src="case studies/pleier/pleier5.jpg" alt="PLEIER">
+    </div>
+
+    <div class="case-section">
+      <p class="case-section-body">The app launched and is available to users.</p>
+    </div>
+
+  </div>
+
+  <!-- ─── Footer ──────────────────────────────────────────────────── -->
+  <footer class="case-footer">
+    <p>© 2026 Jekaterina Senina</p>
+  </footer>
+
+  <script>
+    var header = document.getElementById('site-header');
+    window.addEventListener('scroll', function() {
+      header.style.background = window.scrollY > 50 ? 'rgba(14,15,20,1)' : 'rgba(14,15,20,0)';
+    });
+  </script>
+
+</body>
+</html>

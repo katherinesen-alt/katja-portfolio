@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spaceit MCS – Katja</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #fff; color: #000; }
+
+    .case { max-width: 1080px; margin: 0 auto; padding: 0 48px 80px; }
+
+    /* Header */
+    .case-header { padding-top: 120px; padding-bottom: 48px; }
+    .case-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 24px;
+    }
+    .case-hero-text {
+      font-size: clamp(32px, 4.5vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      color: #000;
+      max-width: 900px;
+    }
+
+    /* Meta rows */
+    .case-meta-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 32px;
+    }
+    .case-meta-item {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      padding: 10px 0;
+    }
+    .case-meta-label {
+      font-size: 13px;
+      font-weight: 400;
+      color: #999;
+      width: 140px;
+      flex-shrink: 0;
+    }
+    .case-meta-value {
+      font-size: 13px;
+      font-weight: 400;
+      color: #000;
+    }
+
+    /* Image placeholder */
+    .case-img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #f0f0f0;
+      border-radius: 0;
+      margin-top: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .case-img span {
+      font-size: 14px;
+      font-weight: 400;
+      color: #bbb;
+    }
+
+    /* Large body text */
+    .case-statement {
+      font-size: 24px;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      line-height: 1.4;
+      color: #000;
+      margin-top: 64px;
+      max-width: 860px;
+    }
+
+    /* Sections with divider */
+    .case-section {
+      margin-top: 64px;
+      padding-top: 0;
+    }
+    .case-section-label {
+      font-size: 13px;
+      font-weight: 400;
+      color: #0057FF;
+      margin-bottom: 16px;
+    }
+    .case-section-body {
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: #444;
+      max-width: 720px;
+    }
+    .case-section .case-img { margin-top: 32px; }
+
+    /* 3-col image grid */
+    .case-img-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .case-img-grid .case-img {
+      margin-top: 0;
+      aspect-ratio: 9 / 16;
+    }
+
+    /* Footer */
+    .case-footer {
+      padding: 40px 48px;
+      text-align: center;
+    }
+    .case-footer p {
+      font-size: 13px;
+      font-weight: 300;
+      color: #999;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ─── Header ──────────────────────────────────────────────────── -->
+  <header style="position:fixed; top:0; left:0; right:0; z-index:50; padding:24px 48px; display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0); transition:background 300ms ease;" id="site-header">
+    <div>
+      <a href="index.html" style="font-size:16px; font-weight:500; color:#000; text-decoration:none; transition:color 200ms ease;" onmouseenter="this.style.color='#0914E2'" onmouseleave="this.style.color='#000'">← Back</a>
+    </div>
+    <div>
+      <a href="https://tally.so/r/VLQD1l" target="_blank" style="display:inline-flex; align-items:center; justify-content:center; height:48px; padding:0 32px; border:none; border-radius:9999px; font-size:16px; font-weight:500; color:#000; text-decoration:none; background:#FDC8D8; transition:background 200ms ease;" onmouseenter="this.style.background='#0914E2';this.style.color='#fff'" onmouseleave="this.style.background='#FDC8D8';this.style.color='#000'">Work with me</a>
+    </div>
+  </header>
+
+  <!-- ─── Case Study ──────────────────────────────────────────────── -->
+  <div class="case">
+
+    <!-- Hero -->
+    <div class="case-header">
+      <h1 class="case-hero-text">Spaceit MCS – Mission Control Software. Full product design of a cloud-based satellite mission control platform.</h1>
+      <div class="case-meta-row">
+        <div class="case-meta-item">
+          <span class="case-meta-label">Type</span>
+          <span class="case-meta-value">SaaS, Complex Systems, Design System</span>
+        </div>
+        <div class="case-meta-item">
+          <span class="case-meta-label">Role</span>
+          <span class="case-meta-value">Product Design</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero image -->
+    <div class="case-img" style="background:none;"><img src="case studies/mcs/main.png" alt="Spaceit MCS Dashboard" style="width:100%; height:100%; object-fit:cover; border-radius: 0;"></div>
+
+    <!-- Problem statement -->
+    <p class="case-statement">Satellite operators were managing missions manually – telemetry in CSV files, commands in Google Docs, no alerts, no queue. The existing tool was built by developers and barely covered the basics.</p>
+
+    <div style="margin-top:48px;">
+      <img src="case studies/mcs/interviews.png" alt="User interviews" style="width:100%; display:block; object-fit:contain;">
+    </div>
+
+    <!-- Section: Dashboard -->
+    <div class="case-section">
+
+      <p class="case-section-body">The dashboard needed to be fully customizable – operators had different satellites with different parameters, and a fixed layout would have served no one. I took an existing idea that wasn't working and redesigned it into a flexible widget system.</p>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:32px;">
+        <img src="case studies/mcs/image2.png" alt="Dashboard widgets" style="width:100%; border-radius: 0;">
+        <img src="case studies/mcs/image1.jpg" alt="Command Queues" style="width:100%; border-radius: 0;">
+      </div>
+    </div>
+
+    <!-- Section: Dark mode -->
+    <div class="case-section">
+      <p class="case-section-body">Dark mode was non-negotiable for the context – people monitoring satellite data work in low-light environments around the clock.</p>
+      <!-- Before/After slider -->
+      <div class="compare-container" style="margin-top:32px; position:relative; width:100%; border-radius: 0; overflow:hidden; cursor:col-resize; user-select:none;">
+        <!-- Bottom layer — dark -->
+        <img src="case studies/mcs/dark.jpg" alt="Dark mode" style="display:block; width:100%; height:auto;">
+        <!-- Top layer — light, clipped -->
+        <div class="compare-before" style="position:absolute; top:0; left:0; bottom:0; width:50%; overflow:hidden;">
+          <img src="case studies/mcs/light.jpg" alt="Light mode" style="display:block; width:auto; height:100%; min-width:0;" class="compare-before-img">
+        </div>
+        <!-- Slider line -->
+        <div class="compare-handle" style="position:absolute; top:0; bottom:0; left:50%; transform:translateX(-50%); width:2px; background:#fff; z-index:2; pointer-events:none;">
+          <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:40px; height:40px; border-radius:50%; background:#fff; box-shadow:0 2px 12px rgba(0,0,0,0.3); display:flex; align-items:center; justify-content:center; pointer-events:none;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M6 4L3 9L6 14" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 4L15 9L12 14" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section: Mobile -->
+    <div class="case-section">
+
+      <p class="case-section-body">User interviews revealed that operators need quick access to critical functions on the go – but not everything. I made the deliberate decision to leave out non-essential features rather than shrink the desktop into a phone.</p>
+      <div class="case-img" style="background:none; aspect-ratio:auto; margin-top:32px;"><img src="case studies/mcs/mobile.png" alt="Mobile screens" style="width:100%; border-radius: 0;"></div>
+    </div>
+
+    <!-- Section: Design system -->
+    <div class="case-section">
+
+      <p class="case-section-body">A custom design system keeps everything consistent – from colors and typography to components and layouts, making it easy to scale and maintain across the entire platform.</p>
+      <div class="case-img" style="background:none; aspect-ratio:auto;"><img src="case studies/mcs/designsystem.jpg" alt="Design system" style="width:100%; border-radius: 0;"></div>
+    </div>
+
+    <!-- Result -->
+    <div class="case-section">
+      <p class="case-section-body">The platform launched and is now used by real Spaceit clients for live satellite mission management.</p>
+    </div>
+
+    <div style="margin-top:48px;">
+      <img src="case studies/mcs/closing.jpg" alt="" style="width:100%; display:block; border-radius: 0;">
+    </div>
+
+  </div>
+
+  <!-- ─── Footer ──────────────────────────────────────────────────── -->
+  <footer class="case-footer">
+    <p>© 2026 Jekaterina Senina</p>
+  </footer>
+
+  <script>
+    var header = document.getElementById('site-header');
+    window.addEventListener('scroll', function() {
+      header.style.background = window.scrollY > 50 ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0)';
+    });
+
+    // Before/After compare slider
+    (function() {
+      var container = document.querySelector('.compare-container');
+      if (!container) return;
+      var before = container.querySelector('.compare-before');
+      var beforeImg = container.querySelector('.compare-before-img');
+      var handle = container.querySelector('.compare-handle');
+      var dragging = false;
+
+      // Keep the before image same width as container
+      function syncImgWidth() {
+        beforeImg.style.width = container.offsetWidth + 'px';
+      }
+      syncImgWidth();
+      window.addEventListener('resize', syncImgWidth);
+
+      function move(x) {
+        var rect = container.getBoundingClientRect();
+        var pos = Math.max(0, Math.min(1, (x - rect.left) / rect.width));
+        var pct = pos * 100;
+        before.style.width = pct + '%';
+        handle.style.left = pct + '%';
+      }
+
+      container.addEventListener('mousedown', function(e) { e.preventDefault(); dragging = true; move(e.clientX); });
+      window.addEventListener('mousemove', function(e) { if (dragging) { e.preventDefault(); move(e.clientX); } });
+      window.addEventListener('mouseup', function() { dragging = false; });
+
+      container.addEventListener('touchstart', function(e) { dragging = true; move(e.touches[0].clientX); }, {passive:true});
+      window.addEventListener('touchmove', function(e) { if (dragging) move(e.touches[0].clientX); }, {passive:true});
+      window.addEventListener('touchend', function() { dragging = false; });
+    })();
+  </script>
+
+</body>
+</html>

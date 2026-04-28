@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Katja – Product Designer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&family=Caveat:wght@400;700&family=Permanent+Marker&family=Rock+Salt&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #fff; color: #000; overflow-x: hidden; }
+
+    /* ── Color system ────────────────────────────────── */
+    :root {
+      --blue: #000;
+      --red: #EC1D2F;
+      --black: #000000;
+      --white: #ffffff;
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 100dvh;
+      padding: 0 48px 20vh;
+      position: relative;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-typing {
+      font-size: clamp(48px, 8vw, 120px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: #000;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 3px;
+      height: 0.85em;
+      background: #000;
+      margin-left: 4px;
+      vertical-align: baseline;
+      position: relative;
+      top: 0.05em;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      font-weight: 300;
+      color: #000;
+      margin-top: 32px;
+      letter-spacing: 0.01em;
+      max-width: 520px;
+      line-height: 1.5;
+    }
+
+    /* ── Reveal animation ─────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Tags – 3D glass capsule (3-div slice) ──── */
+    .tag {
+      position: absolute;
+      display: flex;
+      align-items: stretch;
+      height: 72px;
+      cursor: grab;
+      user-select: none;
+      white-space: nowrap;
+      transform-origin: center center;
+    }
+
+    .tag .pill-left {
+      width: 36px;
+      flex-shrink: 0;
+      background: url('pill-left.png') left center / 100% 100% no-repeat;
+    }
+
+    .tag .pill-mid {
+      flex: 0 0 auto;
+      background: url('pill-mid.png') center / 100% 100% no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 12px;
+      color: #000;
+      font-size: 18px;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+    }
+
+    .tag .pill-right {
+      width: 36px;
+      flex-shrink: 0;
+      background: url('pill-right.png') right center / 100% 100% no-repeat;
+    }
+
+    .tag:active { cursor: grabbing; }
+
+    .project-card:hover img,
+    .project-card:hover video {
+      transform: scale(1.03);
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ─── Header ──────────────────────────────────────────────────── -->
+  <header id="site-header" style="position:fixed; top:0; left:0; right:0; z-index:50; padding:24px 48px; pointer-events:none; display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0); transition:background 300ms ease;">
+    <div style="pointer-events:auto; display:flex; align-items:center; gap:24px;">
+      <a href="#selected-work" style="font-size:16px; font-weight:500; color:#000; text-decoration:none;" onmouseenter="this.querySelector('.rest').style.color='#0914E2'" onmouseleave="this.querySelector('.rest').style.color=''"><span class="rest" style="transition:color 200ms ease;">Work</span></a>
+      <a href="https://www.linkedin.com/in/jekaterina-senina/" target="_blank" style="font-size:16px; font-weight:500; color:#000; text-decoration:none;" onmouseenter="this.querySelector('.rest').style.color='#0914E2'" onmouseleave="this.querySelector('.rest').style.color=''"><span class="rest" style="transition:color 200ms ease;">LinkedIn</span></a>
+      <a href="https://www.instagram.com/kathsenin/" target="_blank" style="font-size:16px; font-weight:500; color:#000; text-decoration:none;" onmouseenter="this.querySelector('.rest').style.color='#0914E2'" onmouseleave="this.querySelector('.rest').style.color=''"><span class="rest" style="transition:color 200ms ease;">Instagram</span></a>
+    </div>
+    <div style="pointer-events:auto; display:flex; align-items:center; gap:24px;">
+    <a href="https://tally.so/r/VLQD1l" target="_blank" style="pointer-events:auto; display:inline-flex; align-items:center; justify-content:center; height:48px; padding:0 32px; border:none; border-radius:9999px; font-size:16px; font-weight:500; color:#000; text-decoration:none; background:#FDC8D8; transition:background 200ms ease;" onmouseenter="this.style.background='#0914E2';this.style.color='#fff'" onmouseleave="this.style.background='#FDC8D8';this.style.color='#000'">Work with me</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-left">
+      <h1 class="hero-typing">
+        <span class="static-text">I'm </span><span id="typed"></span><span class="cursor"></span>
+      </h1>
+      <p class="hero-sub">I work in the product, not around it, and bring the judgment that tools can't replace.</p>
+    </div>
+  </section>
+
+  <!-- Tags layer — covers entire page -->
+  <div id="tags-layer" style="position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:5;">
+    <div class="tag" style="pointer-events:auto;">
+      <div class="pill-left"></div><div class="pill-mid">SaaS Interfaces</div><div class="pill-right"></div>
+    </div>
+    <div class="tag" style="pointer-events:auto;">
+      <div class="pill-left"></div><div class="pill-mid">Design Systems</div><div class="pill-right"></div>
+    </div>
+    <div class="tag" style="pointer-events:auto;">
+      <div class="pill-left"></div><div class="pill-mid">Web &amp; Mobile</div><div class="pill-right"></div>
+    </div>
+    <div class="tag" style="pointer-events:auto;">
+      <div class="pill-left"></div><div class="pill-mid">Data-Driven Products</div><div class="pill-right"></div>
+    </div>
+    <div class="tag" style="pointer-events:auto;">
+      <div class="pill-left"></div><div class="pill-mid">UX Audit</div><div class="pill-right"></div>
+    </div>
+    <div class="tag" style="pointer-events:auto;">
+      <div class="pill-left"></div><div class="pill-mid">Consulting</div><div class="pill-right"></div>
+    </div>
+    <div class="tag" style="pointer-events:auto;">
+      <div class="pill-left"></div><div class="pill-mid">AI Consulting</div><div class="pill-right"></div>
+    </div>
+  </div>
+
+  <!-- ─── Selected Work ────────────────────────────────────────────── -->
+  <section id="selected-work" style="position:relative; z-index:2; padding:120px 48px 40px;">
+    <div style="display:flex; flex-direction:column; gap:240px;">
+
+      <!-- 1: text left, image right -->
+      <a href="case-mcs.html" class="reveal project-card" style="text-decoration:none; color:inherit; display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;">
+        <div>
+          <p style="font-size:14px; font-weight:300; color:#999; margin:0 0 16px;">SaaS, Design System</p>
+          <p style="font-size:clamp(28px, 3vw, 40px); font-weight:500; margin:0; letter-spacing:-0.02em; line-height:1.2;">Spaceit MCS, full product design of a cloud-based satellite mission control platform.</p>
+        </div>
+        <div style="overflow:hidden; border-radius:8px; aspect-ratio:4/3;">
+          <img src="case studies/mcs/main.png" alt="Spaceit MCS" style="width:100%; height:100%; object-fit:cover; object-position:top; display:block; transition:transform 600ms cubic-bezier(0.16,1,0.3,1);">
+        </div>
+      </a>
+
+      <!-- 2: image left, text right -->
+      <a href="case-spaceit-web.html" class="reveal project-card" style="text-decoration:none; color:inherit; display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;">
+        <div style="overflow:hidden; border-radius:8px; aspect-ratio:4/3;">
+          <img src="case studies/spaceit web/hero.jpg" alt="Spaceit Website" style="width:100%; height:100%; object-fit:cover; object-position:top; display:block; transition:transform 600ms cubic-bezier(0.16,1,0.3,1);">
+        </div>
+        <div>
+          <p style="font-size:14px; font-weight:300; color:#999; margin:0 0 16px;">SaaS, Web Design</p>
+          <p style="font-size:clamp(28px, 3vw, 40px); font-weight:500; margin:0; letter-spacing:-0.02em; line-height:1.2;">Spaceit website redesign. Rebuilding the public face of a space-tech startup.</p>
+        </div>
+      </a>
+
+      <!-- 3: text left, image right -->
+      <a href="case-sqence.html" class="reveal project-card" style="text-decoration:none; color:inherit; display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;">
+        <div>
+          <p style="font-size:14px; font-weight:300; color:#999; margin:0 0 16px;">Social Media, Mobile App</p>
+          <p style="font-size:clamp(28px, 3vw, 40px); font-weight:500; margin:0; letter-spacing:-0.02em; line-height:1.2;">SQENCE, product design for social media app.</p>
+        </div>
+        <div style="overflow:hidden; border-radius:8px; aspect-ratio:4/3;">
+          <img src="case studies/sqence/image1.jpg" alt="SQENCE" style="width:100%; height:100%; object-fit:cover; object-position:top; display:block; transition:transform 600ms cubic-bezier(0.16,1,0.3,1);">
+        </div>
+      </a>
+
+      <!-- 4: image left, text right -->
+      <a href="case-pleier.html" class="reveal project-card" style="text-decoration:none; color:inherit; display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;">
+        <div style="overflow:hidden; border-radius:8px; aspect-ratio:4/3;">
+          <img src="case studies/pleier/pleier1.jpg" alt="PLEIER" style="width:100%; height:100%; object-fit:cover; object-position:top; display:block; transition:transform 600ms cubic-bezier(0.16,1,0.3,1);">
+        </div>
+        <div>
+          <p style="font-size:14px; font-weight:300; color:#999; margin:0 0 16px;">Lifestyle, Mobile App</p>
+          <p style="font-size:clamp(28px, 3vw, 40px); font-weight:500; margin:0; letter-spacing:-0.02em; line-height:1.2;">Pleier - audio app for Postimees, one of the largest media groups in the Baltics.</p>
+        </div>
+      </a>
+
+      <!-- 5: text left, image right -->
+      <a href="case-soundfr.html" class="reveal project-card" style="text-decoration:none; color:inherit; display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;">
+        <div>
+          <p style="font-size:14px; font-weight:300; color:#999; margin:0 0 16px;">Healthcare, AI Tools, Web</p>
+          <p style="font-size:clamp(28px, 3vw, 40px); font-weight:500; margin:0; letter-spacing:-0.02em; line-height:1.2;">Minimalist website for a product helping people with hearing loss.</p>
+        </div>
+        <div style="overflow:hidden; border-radius:8px; aspect-ratio:4/3;">
+          <video src="case studies/soundfr/intro.mp4" autoplay loop muted playsinline style="width:100%; height:100%; object-fit:cover; object-position:top; display:block; transition:transform 600ms cubic-bezier(0.16,1,0.3,1);"></video>
+        </div>
+      </a>
+
+      <!-- 6: image left, text right -->
+      <a href="case-ecommerce.html" class="reveal project-card" style="text-decoration:none; color:inherit; display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;">
+        <div style="overflow:hidden; border-radius:8px; aspect-ratio:4/3; background:#e8e8e8;">
+        </div>
+        <div>
+          <p style="font-size:14px; font-weight:300; color:#999; margin:0 0 16px;">E-Commerce, Web Design, MVP</p>
+          <p style="font-size:clamp(28px, 3vw, 40px); font-weight:500; margin:0; letter-spacing:-0.02em; line-height:1.2;">A full e-commerce experience for a platform with verified products.</p>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <footer style="padding:40px 48px; text-align:center;">
+    <p style="font-size:13px; font-weight:300; color:#999; margin:0;">© 2026 Jekaterina Senina</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.20.0/matter.min.js"></script>
+
+  <script>
+    // ── Typing animation ───────────────────────────────
+    (function() {
+      var words = [
+        { text: 'Katja.', color: '#000' },
+        { text: 'a product designer.', color: '#000' }
+      ];
+      var el = document.getElementById('typed');
+      var wordIndex = 0;
+      var charIndex = 0;
+      var isDeleting = false;
+      var typeSpeed = 90;
+      var deleteSpeed = 60;
+      var pauseAfterType = 1800;
+      var pauseAfterDelete = 400;
+
+      function tick() {
+        var current = words[wordIndex];
+        el.style.color = current.color;
+        if (!isDeleting) {
+          var sub = current.text.substring(0, charIndex + 1);
+          if (sub.endsWith('.')) {
+            el.innerHTML = '<span style="color:' + current.color + '">' + sub.slice(0,-1) + '</span><span style="color:#000">.</span>';
+          } else {
+            el.innerHTML = '<span style="color:' + current.color + '">' + sub + '</span>';
+          }
+          charIndex++;
+          if (charIndex === current.text.length) {
+            setTimeout(function() { isDeleting = true; tick(); }, pauseAfterType);
+            return;
+          }
+          setTimeout(tick, typeSpeed);
+        } else {
+          var sub2 = current.text.substring(0, charIndex - 1);
+          if (sub2.endsWith('.')) {
+            el.innerHTML = '<span style="color:' + current.color + '">' + sub2.slice(0,-1) + '</span><span style="color:#000">.</span>';
+          } else {
+            el.innerHTML = '<span style="color:' + current.color + '">' + sub2 + '</span>';
+          }
+          charIndex--;
+          if (charIndex === 0) {
+            isDeleting = false;
+            wordIndex = (wordIndex + 1) % words.length;
+            setTimeout(tick, pauseAfterDelete);
+            return;
+          }
+          setTimeout(tick, deleteSpeed);
+        }
+      }
+      setTimeout(tick, 800);
+    })();
+
+    // ── Reveal on scroll ────────────────────────────────
+    (function() {
+      var reveals = document.querySelectorAll('.reveal');
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          var siblings = Array.from(el.parentElement.children).filter(function(c) { return c.classList.contains('reveal'); });
+          var index = siblings.indexOf(el);
+          el.style.transitionDelay = (index * 120) + 'ms';
+          el.classList.add('visible');
+          observer.unobserve(el);
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      reveals.forEach(function(el) { observer.observe(el); });
+    })();
+
+    // ── Header background on scroll ───────────────────
+    (function() {
+      var header = document.getElementById('site-header');
+      var links = header.querySelectorAll('a[style*="color:#fff"]');
+      var btn = header.querySelector('a[style*="background:#EC1D2F"]');
+
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+          header.style.background = 'rgba(255,255,255,1)';
+        } else {
+          header.style.background = 'rgba(255,255,255,0)';
+        }
+      });
+    })();
+
+    // ── Matter.js physics (full-page gravity) ──────────
+    (function() {
+      var Engine = Matter.Engine,
+          World = Matter.World,
+          Bodies = Matter.Bodies,
+          Body = Matter.Body,
+          Runner = Matter.Runner,
+          Events = Matter.Events;
+
+      var engine = Engine.create();
+      var world = engine.world;
+      engine.gravity.y = 1.8;
+
+      var runner = Runner.create();
+      Runner.run(runner, engine);
+
+      var vw = window.innerWidth;
+      var vh = window.innerHeight;
+      var pageH = document.documentElement.scrollHeight;
+
+      // Walls — floor follows viewport bottom, walls span full page
+      var wallThickness = 60;
+      var floorY = window.scrollY + vh;
+      var floor = Bodies.rectangle(vw / 2, floorY + wallThickness / 2 - 10, vw * 2, wallThickness, { isStatic: true, friction: 0.8, restitution: 0.1 });
+      var wallLeft = Bodies.rectangle(-wallThickness / 2, pageH / 2, wallThickness, pageH * 2, { isStatic: true });
+      var wallRight = Bodies.rectangle(vw + wallThickness / 2, pageH / 2, wallThickness, pageH * 2, { isStatic: true });
+      World.add(world, [floor, wallLeft, wallRight]);
+
+      // Obstacle bodies from content blocks
+      var obstacles = [];
+      function buildObstacles() {
+        obstacles.forEach(function(ob) { World.remove(world, ob); });
+        obstacles = [];
+
+        // Each project card is a solid block — pills land on its top edge.
+        // Use offsetTop chain (ignores CSS transforms like .reveal translateY)
+        // so obstacle aligns with post-reveal natural position, not pre-reveal.
+        var cards = document.querySelectorAll('#selected-work [style*="aspect-ratio"]');
+        cards.forEach(function(card) {
+          var top = 0, left = 0, node = card;
+          while (node) {
+            top += node.offsetTop || 0;
+            left += node.offsetLeft || 0;
+            node = node.offsetParent;
+          }
+          var w = card.offsetWidth;
+          var h = card.offsetHeight;
+          var ob = Bodies.rectangle(
+            left + w / 2,
+            top + h / 2,
+            w, h,
+            { isStatic: true, friction: 0.8, restitution: 0.05 }
+          );
+          World.add(world, ob);
+          obstacles.push(ob);
+        });
+      }
+
+      // Build after layout settles, then again once images load
+      setTimeout(buildObstacles, 500);
+      window.addEventListener('load', buildObstacles);
+
+      // Floor follows viewport bottom on scroll
+      window.addEventListener('scroll', function() {
+        var newFloorY = window.scrollY + vh;
+        Body.setPosition(floor, { x: vw / 2, y: newFloorY + wallThickness / 2 - 10 });
+      });
+
+      window.addEventListener('resize', function() {
+        vw = window.innerWidth;
+        vh = window.innerHeight;
+        pageH = document.documentElement.scrollHeight;
+        Body.setPosition(floor, { x: vw / 2, y: window.scrollY + vh + wallThickness / 2 - 10 });
+        Body.setPosition(wallLeft, { x: -wallThickness / 2, y: pageH / 2 });
+        Body.setPosition(wallRight, { x: vw + wallThickness / 2, y: pageH / 2 });
+        buildObstacles();
+      });
+
+      // Create physics bodies for each tag
+      var tagEls = Array.from(document.querySelectorAll('.tag'));
+      var tagBodies = [];
+      var startAngles = [-0.4, 0.25, -0.14, 0.5, -0.3, 0.1, -0.2];
+
+      tagEls.forEach(function(el, i) {
+        var w = el.offsetWidth;
+        var h = el.offsetHeight;
+        var body = Bodies.rectangle(
+          vw - 400 + (Math.random() - 0.5) * 300,
+          -80 - i * 100,
+          w, h,
+          {
+            chamfer: { radius: h / 2 },
+            friction: 0.6,
+            frictionAir: 0.02,
+            restitution: 0.15,
+            density: 0.002,
+            angle: startAngles[i] || 0
+          }
+        );
+        tagBodies.push({ el: el, body: body });
+        World.add(world, body);
+      });
+
+      // Manual drag — accounts for scroll offset
+      tagBodies.forEach(function(tb) {
+        tb.el.addEventListener('mousedown', function(e) {
+          e.preventDefault();
+          tb.el.style.cursor = 'grabbing';
+
+          var offset = {
+            x: e.clientX - (tb.body.position.x),
+            y: (e.clientY + window.scrollY) - tb.body.position.y
+          };
+
+          function onMove(ev) {
+            var targetX = ev.clientX - offset.x;
+            var targetY = (ev.clientY + window.scrollY) - offset.y;
+            Body.setVelocity(tb.body, {
+              x: (targetX - tb.body.position.x) * 0.4,
+              y: (targetY - tb.body.position.y) * 0.4
+            });
+          }
+
+          function onUp() {
+            tb.el.style.cursor = 'grab';
+            document.removeEventListener('mousemove', onMove);
+            document.removeEventListener('mouseup', onUp);
+          }
+
+          document.addEventListener('mousemove', onMove);
+          document.addEventListener('mouseup', onUp);
+        });
+      });
+
+      // Clamp angle + cap fall speed + push pills out of obstacles
+      var maxAngle = Math.PI * 0.4;
+      var maxFallSpeed = 18;
+      Events.on(engine, 'beforeUpdate', function() {
+        tagBodies.forEach(function(tb) {
+          var a = tb.body.angle % (Math.PI * 2);
+          if (a > Math.PI) a -= Math.PI * 2;
+          if (a < -Math.PI) a += Math.PI * 2;
+          if (a > maxAngle) {
+            Body.setAngle(tb.body, maxAngle);
+            Body.setAngularVelocity(tb.body, tb.body.angularVelocity * -0.3);
+          } else if (a < -maxAngle) {
+            Body.setAngle(tb.body, -maxAngle);
+            Body.setAngularVelocity(tb.body, tb.body.angularVelocity * -0.3);
+          }
+          if (tb.body.velocity.y > maxFallSpeed) {
+            Body.setVelocity(tb.body, { x: tb.body.velocity.x, y: maxFallSpeed });
+          }
+          var pb = tb.body.bounds;
+          var px = tb.body.position.x;
+          var py = tb.body.position.y;
+          for (var i = 0; i < obstacles.length; i++) {
+            var obB = obstacles[i].bounds;
+            if (px > obB.min.x && px < obB.max.x && py > obB.min.y && py < obB.max.y) {
+              var bottomOffset = pb.max.y - py;
+              Body.setPosition(tb.body, {
+                x: px,
+                y: obB.min.y - bottomOffset - 1
+              });
+              Body.setVelocity(tb.body, { x: tb.body.velocity.x * 0.3, y: 0 });
+              break;
+            }
+          }
+        });
+      });
+
+      // Render — positions are in page coordinates, offset by scroll for fixed layer
+      (function render() {
+        var scrollY = window.scrollY;
+        tagBodies.forEach(function(tb) {
+          var pos = tb.body.position;
+          var angle = tb.body.angle;
+          var w = tb.el.offsetWidth;
+          var h = tb.el.offsetHeight;
+          tb.el.style.left = (pos.x - w / 2) + 'px';
+          tb.el.style.top = (pos.y - h / 2 - scrollY) + 'px';
+          tb.el.style.transform = 'rotate(' + angle + 'rad)';
+        });
+        requestAnimationFrame(render);
+      })();
+    })();
+
+  </script>
+
+</body>
+</html>

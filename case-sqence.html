@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SQENCE – Katja</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #fff; color: #000; }
+
+    .case { max-width: 1080px; margin: 0 auto; padding: 0 48px 80px; }
+
+    .case-header { padding-top: 120px; padding-bottom: 48px; }
+    .case-hero-text {
+      font-size: clamp(32px, 4.5vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      color: #000;
+      max-width: 900px;
+    }
+
+    .case-meta-row { display: flex; flex-direction: column; gap: 0; margin-top: 32px; }
+    .case-meta-item { display: flex; align-items: baseline; gap: 16px; padding: 10px 0; }
+    .case-meta-label { font-size: 13px; font-weight: 400; color: #999; width: 140px; flex-shrink: 0; }
+    .case-meta-value { font-size: 13px; font-weight: 400; color: #000; }
+
+    .case-img {
+      width: 100%;
+      margin-top: 32px;
+    }
+    .case-img img {
+      width: 100%;
+      display: block;
+      border-radius: 20px;
+    }
+
+    .case-statement {
+      font-size: 24px;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      line-height: 1.4;
+      color: #000;
+      margin-top: 64px;
+      max-width: 860px;
+    }
+
+    .case-section { margin-top: 64px; }
+    .case-section-body {
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: #444;
+      max-width: 720px;
+    }
+
+    .case-footer { padding: 40px 48px; text-align: center; }
+    .case-footer p { font-size: 13px; font-weight: 300; color: #999; }
+  </style>
+</head>
+
+<body>
+
+  <!-- ─── Header ──────────────────────────────────────────────────── -->
+  <header style="position:fixed; top:0; left:0; right:0; z-index:50; padding:24px 48px; display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0); transition:background 300ms ease;" id="site-header">
+    <div>
+      <a href="index.html" style="font-size:16px; font-weight:500; color:#000; text-decoration:none; transition:color 200ms ease;" onmouseenter="this.style.color='#0914E2'" onmouseleave="this.style.color='#000'">← Back</a>
+    </div>
+    <div>
+      <a href="https://tally.so/r/VLQD1l" target="_blank" style="display:inline-flex; align-items:center; justify-content:center; height:48px; padding:0 32px; border:none; border-radius:9999px; font-size:16px; font-weight:500; color:#000; text-decoration:none; background:#FDC8D8; transition:background 200ms ease;" onmouseenter="this.style.background='#0914E2';this.style.color='#fff'" onmouseleave="this.style.background='#FDC8D8';this.style.color='#000'">Work with me</a>
+    </div>
+  </header>
+
+  <!-- ─── Case Study ──────────────────────────────────────────────── -->
+  <div class="case">
+
+    <!-- Hero -->
+    <div class="case-header">
+      <h1 class="case-hero-text">SQENCE, most mysterious social media.</h1>
+      <div class="case-meta-row">
+        <div class="case-meta-item">
+          <span class="case-meta-label">Type</span>
+          <span class="case-meta-value">Social Media, Mobile App</span>
+        </div>
+        <div class="case-meta-item">
+          <span class="case-meta-label">Role</span>
+          <span class="case-meta-value">Product Design</span>
+        </div>
+        <div class="case-meta-item">
+          <span class="case-meta-label">Credits</span>
+          <span class="case-meta-value"><a href="https://www.linkedin.com/in/andreas-vinkel/" target="_blank" style="color:#000; text-decoration:underline; text-underline-offset:2px; transition:color 200ms ease;" onmouseenter="this.style.color='#0914E2'" onmouseleave="this.style.color='#000'">Andreas Vinkel</a> - brand and graphic design</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero image -->
+    <div class="case-img">
+      <img src="case studies/sqence/image1.jpg" alt="SQENCE hero">
+    </div>
+
+    <!-- Problem statement -->
+    <p class="case-statement">Product design for a social network built around real moments and real people.</p>
+
+    <div class="case-section">
+      <p class="case-section-body">Most social apps optimize for performance: curated photos, filters, idealized versions of life. SQENCE was built on the opposite premise: no uploads, no filters, only content captured in real time.</p>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-top:32px;">
+      <img src="case studies/sqence/image4-1.jpg" alt="SQENCE flows" style="width:100%; display:block; border-radius: 20px;">
+      <img src="case studies/sqence/image4-2.png" alt="SQENCE flows" style="width:100%; display:block; border-radius: 20px;">
+      <img src="case studies/sqence/image4-3.jpg" alt="SQENCE flows" style="width:100%; display:block; border-radius: 20px;">
+    </div>
+
+    <div class="case-section">
+      <p class="case-section-body">The challenge was making a restrictive concept feel inviting rather than limiting, and building a social experience that still feels fun without the tools users are used to. A flawless balance between functionality and clean, simple design.</p>
+    </div>
+
+    <div class="case-img">
+      <img src="case studies/sqence/image7.jpg" alt="SQENCE visual system">
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-top:32px;">
+      <img src="case studies/sqence/image2-1.png" alt="SQENCE concept" style="width:100%; display:block; border-radius: 20px;">
+      <img src="case studies/sqence/image2-2.jpg" alt="SQENCE concept" style="width:100%; display:block; border-radius: 20px;">
+      <img src="case studies/sqence/image2-3.png" alt="SQENCE concept" style="width:100%; display:block; border-radius: 20px;">
+    </div>
+
+    <div class="case-img">
+      <img src="case studies/sqence/image5.jpg" alt="SQENCE interface">
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:32px;">
+      <img src="case studies/sqence/image3-1.jpg" alt="SQENCE screens" style="width:100%; display:block; border-radius: 20px;">
+      <img src="case studies/sqence/image3-2.jpg" alt="SQENCE screens" style="width:100%; display:block; border-radius: 20px;">
+    </div>
+
+    <div class="case-img">
+      <img src="case studies/sqence/image6.jpg" alt="SQENCE details">
+    </div>
+
+  </div>
+
+  <!-- ─── Footer ──────────────────────────────────────────────────── -->
+  <footer class="case-footer">
+    <p>© 2026 Jekaterina Senina</p>
+  </footer>
+
+  <script>
+    var header = document.getElementById('site-header');
+    window.addEventListener('scroll', function() {
+      header.style.background = window.scrollY > 50 ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0)';
+    });
+  </script>
+
+</body>
+</html>
