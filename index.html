@@ -121,6 +121,135 @@
       transform: scale(1.03);
     }
 
+    /* CTA pill button — desktop default height */
+    .cta-pill { height: 48px; }
+
+    /* ── Mobile menu (burger + overlay) ──────── */
+    #mobile-menu-btn {
+      display: none;
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: transparent;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+    #mobile-menu-btn .burger-line {
+      display: block;
+      width: 24px;
+      height: 2.5px;
+      background: #000;
+      border-radius: 2px;
+      transform-origin: center;
+      transition: transform 350ms cubic-bezier(0.65, 0, 0.35, 1),
+                  opacity 200ms ease;
+    }
+    #mobile-menu-btn.open .burger-line:nth-child(1) {
+      transform: translateY(8.5px) rotate(45deg);
+    }
+    #mobile-menu-btn.open .burger-line:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0.4);
+    }
+    #mobile-menu-btn.open .burger-line:nth-child(3) {
+      transform: translateY(-8.5px) rotate(-45deg);
+    }
+
+    #mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: #fff;
+      z-index: 60;
+      display: flex;
+      flex-direction: column;
+      padding: 100px 24px 32px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 320ms ease, visibility 320ms;
+    }
+    #mobile-menu.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+    .mobile-menu-link {
+      font-size: 32px;
+      font-weight: 500;
+      color: #000;
+      text-decoration: none;
+      padding: 16px 0;
+      letter-spacing: -0.01em;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 400ms cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 400ms cubic-bezier(0.16, 1, 0.3, 1),
+                  color 200ms ease;
+    }
+    #mobile-menu.open .mobile-menu-link {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #mobile-menu.open .mobile-menu-link:nth-of-type(1) { transition-delay: 120ms; }
+    #mobile-menu.open .mobile-menu-link:nth-of-type(2) { transition-delay: 180ms; }
+    #mobile-menu.open .mobile-menu-link:nth-of-type(3) { transition-delay: 240ms; }
+    .mobile-menu-link:hover { color: #0914E2; }
+
+    /* ── Mobile ────────────────────────────────── */
+    @media (max-width: 768px) {
+      .hero {
+        justify-content: flex-start;
+        min-height: 100dvh;
+        padding: 110px 20px 0;
+      }
+      .hero-typing {
+        font-size: clamp(36px, 11vw, 64px);
+        line-height: 1.05;
+        min-height: 2.1em;
+      }
+      .hero-typing .static-text { display: block; }
+      .hero-sub { font-size: 18px; margin-top: 16px; max-width: 100%; }
+
+      /* Mobile header: hide nav links, button stretches, burger appears */
+      #site-header { padding: 14px 16px !important; z-index: 70 !important; }
+      #site-header > div:first-child { display: none !important; }
+      #site-header > div:last-child {
+        width: 100% !important;
+        gap: 24px !important;
+        flex-direction: row-reverse !important;
+      }
+      #site-header a[href*="tally.so"] {
+        flex: 1 !important;
+        height: 56px !important;
+        padding: 0 16px !important;
+        font-size: 16px !important;
+      }
+      #mobile-menu-btn { display: flex !important; }
+
+      /* Selected work section */
+      #selected-work { padding: 80px 20px 32px !important; }
+      #selected-work > div { gap: 36px !important; }
+
+      /* Stack cards vertically — image always on top */
+      .project-card {
+        display: flex !important;
+        flex-direction: column-reverse !important;
+        gap: 20px !important;
+      }
+      .project-card:nth-child(even) {
+        flex-direction: column !important;
+      }
+      .project-card p:first-child { font-size: 16px !important; }
+      .project-card p:last-child {
+        font-size: 28px !important;
+        font-weight: 600 !important;
+      }
+    }
   </style>
 </head>
 
@@ -134,9 +263,21 @@
       <a href="https://www.instagram.com/kathsenin/" target="_blank" style="font-size:16px; font-weight:500; color:#000; text-decoration:none;" onmouseenter="this.querySelector('.rest').style.color='#0914E2'" onmouseleave="this.querySelector('.rest').style.color=''"><span class="rest" style="transition:color 200ms ease;">Instagram</span></a>
     </div>
     <div style="pointer-events:auto; display:flex; align-items:center; gap:24px;">
-    <a href="https://tally.so/r/VLQD1l" target="_blank" style="pointer-events:auto; display:inline-flex; align-items:center; justify-content:center; height:48px; padding:0 32px; border:none; border-radius:9999px; font-size:16px; font-weight:500; color:#000; text-decoration:none; background:#FDC8D8; transition:background 200ms ease;" onmouseenter="this.style.background='#0914E2';this.style.color='#fff'" onmouseleave="this.style.background='#FDC8D8';this.style.color='#000'">Work with me</a>
+    <a href="https://tally.so/r/VLQD1l" target="_blank" class="cta-pill" style="pointer-events:auto; display:inline-flex; align-items:center; justify-content:center; padding:0 32px; border:none; border-radius:9999px; font-size:16px; font-weight:500; color:#000; text-decoration:none; background:#FDC8D8; transition:background 200ms ease;" onmouseenter="this.style.background='#0914E2';this.style.color='#fff'" onmouseleave="this.style.background='#FDC8D8';this.style.color='#000'">Work with me</a>
+    <button id="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false" style="pointer-events:auto;">
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+    </button>
     </div>
   </header>
+
+  <!-- Mobile menu overlay -->
+  <div id="mobile-menu" aria-hidden="true">
+    <a href="#selected-work" class="mobile-menu-link">Work</a>
+    <a href="https://www.linkedin.com/in/jekaterina-senina/" target="_blank" class="mobile-menu-link">LinkedIn</a>
+    <a href="https://www.instagram.com/kathsenin/" target="_blank" class="mobile-menu-link">Instagram</a>
+  </div>
 
   <section class="hero">
     <div class="hero-left">
@@ -252,6 +393,25 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.20.0/matter.min.js"></script>
 
   <script>
+    // ── Mobile menu toggle ──────────────────────────────
+    (function() {
+      var btn = document.getElementById('mobile-menu-btn');
+      var menu = document.getElementById('mobile-menu');
+      function setOpen(open) {
+        btn.classList.toggle('open', open);
+        menu.classList.toggle('open', open);
+        btn.setAttribute('aria-expanded', open);
+        menu.setAttribute('aria-hidden', !open);
+        document.body.style.overflow = open ? 'hidden' : '';
+      }
+      btn.addEventListener('click', function() {
+        setOpen(!btn.classList.contains('open'));
+      });
+      menu.querySelectorAll('.mobile-menu-link').forEach(function(a) {
+        a.addEventListener('click', function() { setOpen(false); });
+      });
+    })();
+
     // ── Typing animation ───────────────────────────────
     (function() {
       var words = [
@@ -422,8 +582,11 @@
       tagEls.forEach(function(el, i) {
         var w = el.offsetWidth;
         var h = el.offsetHeight;
+        var spawnX = vw - 400 + (Math.random() - 0.5) * 300;
+        // Clamp inside viewport so pills can't spawn past left wall (mobile)
+        spawnX = Math.max(w / 2 + 10, Math.min(vw - w / 2 - 10, spawnX));
         var body = Bodies.rectangle(
-          vw - 400 + (Math.random() - 0.5) * 300,
+          spawnX,
           -80 - i * 100,
           w, h,
           {
@@ -439,35 +602,60 @@
         World.add(world, body);
       });
 
-      // Manual drag — accounts for scroll offset
+      // Manual drag — supports both mouse and touch, accounts for scroll offset
       tagBodies.forEach(function(tb) {
+        function startDrag(clientX, clientY) {
+          tb.el.style.cursor = 'grabbing';
+          var offset = {
+            x: clientX - tb.body.position.x,
+            y: (clientY + window.scrollY) - tb.body.position.y
+          };
+          return {
+            move: function(cx, cy) {
+              var targetX = cx - offset.x;
+              var targetY = (cy + window.scrollY) - offset.y;
+              Body.setVelocity(tb.body, {
+                x: (targetX - tb.body.position.x) * 0.4,
+                y: (targetY - tb.body.position.y) * 0.4
+              });
+            },
+            end: function() { tb.el.style.cursor = 'grab'; }
+          };
+        }
+
         tb.el.addEventListener('mousedown', function(e) {
           e.preventDefault();
-          tb.el.style.cursor = 'grabbing';
-
-          var offset = {
-            x: e.clientX - (tb.body.position.x),
-            y: (e.clientY + window.scrollY) - tb.body.position.y
-          };
-
-          function onMove(ev) {
-            var targetX = ev.clientX - offset.x;
-            var targetY = (ev.clientY + window.scrollY) - offset.y;
-            Body.setVelocity(tb.body, {
-              x: (targetX - tb.body.position.x) * 0.4,
-              y: (targetY - tb.body.position.y) * 0.4
-            });
-          }
-
+          var d = startDrag(e.clientX, e.clientY);
+          function onMove(ev) { d.move(ev.clientX, ev.clientY); }
           function onUp() {
-            tb.el.style.cursor = 'grab';
+            d.end();
             document.removeEventListener('mousemove', onMove);
             document.removeEventListener('mouseup', onUp);
           }
-
           document.addEventListener('mousemove', onMove);
           document.addEventListener('mouseup', onUp);
         });
+
+        tb.el.addEventListener('touchstart', function(e) {
+          if (!e.touches.length) return;
+          e.preventDefault();
+          var t = e.touches[0];
+          var d = startDrag(t.clientX, t.clientY);
+          function onMove(ev) {
+            if (!ev.touches.length) return;
+            ev.preventDefault();
+            d.move(ev.touches[0].clientX, ev.touches[0].clientY);
+          }
+          function onUp() {
+            d.end();
+            document.removeEventListener('touchmove', onMove);
+            document.removeEventListener('touchend', onUp);
+            document.removeEventListener('touchcancel', onUp);
+          }
+          document.addEventListener('touchmove', onMove, { passive: false });
+          document.addEventListener('touchend', onUp);
+          document.addEventListener('touchcancel', onUp);
+        }, { passive: false });
       });
 
       // Clamp angle + cap fall speed + push pills out of obstacles
