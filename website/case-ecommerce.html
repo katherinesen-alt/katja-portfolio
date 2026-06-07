@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Commerce – Katja</title>
+  <link rel="stylesheet" href="fonts.css">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+    body { font-family: 'Onest', system-ui, sans-serif; background: #ffffff; color: #040002; }
+
+    .case { max-width: 1080px; margin: 0 auto; padding: 0 48px 80px; }
+
+    .case-header { padding-top: 120px; padding-bottom: 48px; }
+    .case-hero-text {
+      font-size: clamp(32px, 4.5vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      color: #040002;
+      max-width: 900px;
+    }
+
+    .case-meta-row { display: flex; flex-direction: column; gap: 0; margin-top: 32px; }
+    .case-meta-item { display: flex; align-items: baseline; gap: 16px; padding: 10px 0; }
+    .case-meta-label { font-size: 13px; font-weight: 400; color: #999; width: 140px; flex-shrink: 0; }
+    .case-meta-value { font-size: 13px; font-weight: 400; color: #040002; }
+
+    .case-img {
+      width: 100%;
+      margin-top: 48px;
+    }
+    .case-img img {
+      width: 100%;
+      display: block;
+      border-radius: 0;
+    }
+    .case-img-row {
+      display: flex;
+      gap: 16px;
+      margin-top: 48px;
+    }
+    .case-img-row > div { min-width: 0; }
+    .case-img-row img {
+      width: 100%;
+      display: block;
+      border-radius: 0;
+    }
+
+    .case-statement {
+      font-size: 24px;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      line-height: 1.4;
+      color: #040002;
+      margin-top: 48px;
+      max-width: 860px;
+    }
+
+    .case-section { margin-top: 48px; }
+    .case-statement + .case-section { margin-top: 24px; }
+    .case-section-body {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: #444;
+      max-width: 720px;
+    }
+
+    .case-footer { padding: 40px 48px; text-align: center; }
+    .case-footer p { font-size: 13px; font-weight: 300; color: #999; }
+
+    /* ── Mobile ────────────────────────────────── */
+    @media (max-width: 768px) {
+      .case { padding: 0 20px 60px; }
+      .case-header { padding-top: 88px; padding-bottom: 32px; }
+      .case-meta-item { gap: 12px; padding: 8px 0; }
+      .case-meta-label { width: 88px; font-size: 13px; }
+      .case-meta-value { font-size: 13px; }
+      .case-statement { font-size: 20px; line-height: 1.4; margin-top: 40px; }
+      .case-section { margin-top: 40px; }
+      .case-section-body { font-size: 16px; line-height: 1.6; }
+      .case-img { margin-top: 32px; }
+      .case-img-row { flex-direction: column; gap: 16px; margin-top: 32px; }
+
+      #site-header { padding: 14px 20px !important; }
+      #site-header a { font-size: 14px !important; }
+      #site-header a[href*="tally.so"] {
+        height: 40px !important;
+        padding: 0 18px !important;
+        font-size: 14px !important;
+      }
+      .case-footer { padding: 32px 20px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ─── Header ──────────────────────────────────────────────────── -->
+  <!-- header injected by header.js (state=back) -->
+
+  <!-- ─── Case Study ──────────────────────────────────────────────── -->
+  <div class="case">
+
+    <!-- Hero -->
+    <div class="case-header">
+      <h1 class="case-hero-text">A full e-commerce experience for a platform with verified products.</h1>
+      <div class="case-meta-row">
+        <div class="case-meta-item">
+          <span class="case-meta-label">Type</span>
+          <span class="case-meta-value">E-Commerce, Web Design, MVP</span>
+        </div>
+        <div class="case-meta-item">
+          <span class="case-meta-label">Role</span>
+          <span class="case-meta-value">Product Designer</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-img">
+      <img src="toimib1.jpg" alt="Toimib homepage">
+    </div>
+
+    <p class="case-statement">Toimib has an unusual model: every product goes through a verification process before it goes on sale. This is not just a marketing claim, it is what the entire user experience is built around. Trust and transparency are not an add-on here, they are the core of the product.</p>
+
+    <div class="case-section">
+      <p class="case-section-body">The client came with a rough sketch and a clear business idea but no design foundation. The work covered the full customer journey from the homepage to checkout: a catalog with category and price filters, product pages with video reviews and ratings, a slide-out cart, a multi-step checkout with card and bank payment options, a wishlist, gift cards, and an about page explaining the verification process.</p>
+    </div>
+
+    <div class="case-img-row">
+      <div style="flex: 3974 1 0;"><img src="toimib2.jpg" alt="Toimib product detail"></div>
+      <div style="flex: 9718 1 0;"><img src="toimib3.jpg" alt="Toimib catalog and product page"></div>
+    </div>
+
+    <div class="case-section">
+      <p class="case-section-body">Every screen was designed around one idea: this store is different because it actually checks what it sells.</p>
+    </div>
+
+    <div class="case-img">
+      <img src="toimib4.jpg" alt="Toimib checkout flow">
+    </div>
+
+  </div>
+
+  <!-- ─── Footer ──────────────────────────────────────────────────── -->
+  <footer class="case-footer">
+    <p>© 2026 Jekaterina Senina</p>
+  </footer>
+
+  <script>
+  </script>
+
+  <script src="header.js" data-state="back"></script>
+</body>
+</html>

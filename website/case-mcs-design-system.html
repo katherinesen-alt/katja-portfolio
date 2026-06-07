@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spaceit MCS Design System – Katja</title>
+  <link rel="stylesheet" href="fonts.css">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+    body { font-family: 'Onest', system-ui, sans-serif; background: #ffffff; color: #040002; }
+
+    .case { max-width: 1080px; margin: 0 auto; padding: 0 48px 80px; }
+
+    /* Header */
+    .case-header { padding-top: 120px; padding-bottom: 0; }
+    .case-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 24px;
+    }
+    .case-hero-text {
+      font-size: clamp(32px, 4.5vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      color: #040002;
+      max-width: 900px;
+    }
+
+    /* Meta rows */
+    .case-meta-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 32px;
+    }
+    .case-meta-item {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      padding: 10px 0;
+    }
+    .case-meta-label {
+      font-size: 13px;
+      font-weight: 400;
+      color: #999;
+      width: 140px;
+      flex-shrink: 0;
+    }
+    .case-meta-value {
+      font-size: 13px;
+      font-weight: 400;
+      color: #040002;
+    }
+
+    /* Image placeholder */
+    .case-img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #f0f0f0;
+      border-radius: 0;
+      margin-top: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .case-img span {
+      font-size: 14px;
+      font-weight: 400;
+      color: #bbb;
+    }
+
+    /* Lead heading */
+    .case-statement {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      color: #040002;
+      margin-top: 64px;
+      max-width: 860px;
+    }
+
+    /* Sections */
+    .case-section {
+      margin-top: 64px;
+      padding-top: 0;
+    }
+    .case-section-body {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: #444;
+      max-width: 720px;
+    }
+    .case-section-body + .case-section-body { margin-top: 24px; }
+    .case-statement + .case-section { margin-top: 24px; }
+    .case-section-heading {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      color: #040002;
+      margin-top: 48px;
+      margin-bottom: 24px;
+      max-width: 720px;
+    }
+    .case-section-heading:first-child { margin-top: 0; }
+    .case-highlight {
+      background-color: #DBE9FF;
+      color: #040002;
+      padding: 1px 6px;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+    .case-quote {
+      font-size: 16px;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.6;
+      color: #444;
+      border-left: 2px solid #1E35FF;
+      padding-left: 20px;
+      margin-top: 24px;
+      max-width: 720px;
+    }
+    .case-quote + .case-quote { margin-top: 24px; }
+    .case-quote + .case-section-body { margin-top: 24px; }
+    .case-section .case-img { margin-top: 32px; }
+    .case-section .case-img + .case-section-body { margin-top: 32px; }
+    .case-section > div[style*="margin-top"] { margin-top: 32px !important; }
+    .case-section > div[style*="margin-top"] + .case-section-body { margin-top: 32px; }
+    .case-closing { margin-top: 64px; }
+
+    /* Footer */
+    .case-footer {
+      padding: 40px 48px;
+      text-align: center;
+    }
+    .case-footer p {
+      font-size: 13px;
+      font-weight: 300;
+      color: #999;
+    }
+
+    /* ── Mobile ────────────────────────────────── */
+    @media (max-width: 768px) {
+      .case { padding: 0 20px 60px; }
+      .case-header { padding-top: 88px; padding-bottom: 0; }
+      .case-meta-item { gap: 12px; padding: 8px 0; }
+      .case-meta-label { width: 88px; font-size: 13px; }
+      .case-meta-value { font-size: 13px; }
+      .case-statement { font-size: 22px; line-height: 1.25; margin-top: 40px; }
+      .case-section { margin-top: 40px; }
+      .case-section-body { font-size: 16px; line-height: 1.6; }
+      .case-section-heading { font-size: 22px; margin-top: 32px; margin-bottom: 20px; }
+      .case-section-body + .case-section-body { margin-top: 20px; }
+      .case-quote { font-size: 16px; padding-left: 16px; margin-top: 20px; }
+      .case-quote + .case-quote { margin-top: 20px; }
+      .case-quote + .case-section-body { margin-top: 20px; }
+      .case-img { margin-top: 40px; }
+      .case-section .case-img { margin-top: 24px; }
+      .case-section .case-img + .case-section-body { margin-top: 24px; }
+      .case-section > div[style*="margin-top"] { margin-top: 24px !important; }
+      .case-section > div[style*="margin-top"] + .case-section-body { margin-top: 24px; }
+      .case-closing { margin-top: 40px; }
+
+      #site-header { padding: 14px 20px !important; }
+      #site-header a { font-size: 14px !important; }
+      #site-header a[href*="tally.so"] {
+        height: 40px !important;
+        padding: 0 18px !important;
+        font-size: 14px !important;
+      }
+      .case-footer { padding: 32px 20px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ─── Header ──────────────────────────────────────────────────── -->
+  <!-- header injected by header.js (state=back) -->
+
+  <!-- ─── Case Study ──────────────────────────────────────────────── -->
+  <div class="case">
+
+    <!-- Hero -->
+    <div class="case-header">
+      <h1 class="case-hero-text">Spaceit MCS Design System.</h1>
+      <div class="case-meta-row">
+        <div class="case-meta-item">
+          <span class="case-meta-label">Type</span>
+          <span class="case-meta-value">Design System, SaaS, Mobile & Desktop</span>
+        </div>
+        <div class="case-meta-item">
+          <span class="case-meta-label">Role</span>
+          <span class="case-meta-value">Sole Product Designer</span>
+        </div>
+        <div class="case-meta-item">
+          <span class="case-meta-label">Duration</span>
+          <span class="case-meta-value">3 years, built in parallel with the product</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero image placeholder -->
+    <div class="case-img" style="background:none;"><img src="case studies/ds/hero.png?v=2" alt="MCS Design System" style="width:100%; height:100%; object-fit:cover; border-radius:0;"></div>
+
+    <!-- Lead -->
+    <p class="case-statement">Why a system, and why from day one.</p>
+
+    <!-- Intro -->
+    <div class="case-section">
+      <p class="case-section-body">The first time the product opened, it was clear it wouldn't survive the next module without a system underneath. Mission control software accumulates surface fast: dashboards, telemetry, command queues, contact planning, asset states, logs, settings. Each of those needs tables, alerts, modals, controls. Without a system, every module would re-invent the same pieces in slightly different ways, and the product would feel like five products stitched together.</p>
+      <p class="case-section-body">So the system started before most of the product did.</p>
+    </div>
+
+    <!-- How it's built -->
+    <div class="case-section">
+      <h3 class="case-section-heading">How it's built</h3>
+      <p class="case-section-body">Atomic design, 8pt grid, all theming through component variants. Figma variables didn't yet support color or typography when the system started, so everything ran through styles. Themes (light and dark, on both desktop and mobile) lived inside component variants, not parallel files. One component, one source of truth, four faces.</p>
+      <p class="case-section-body">The library is organised by category, not by module. Basics (colors, typography, icons), then the building blocks (avatars, buttons, labels, alerts, controls, inputs, dropdowns, date/time pickers, calendars, tables, data, modals, widgets, sidebar menu) for desktop. A parallel structure for mobile, with the patterns mobile actually needs: navigation bar, action bar, bottom sheets, rows. Components carry annotations and usage notes inside the file. The front-end developer worked from the same library, in parallel, and the production product maps to the Figma source one to one.</p>
+    </div>
+
+    <!-- Widgets -->
+    <div class="case-section">
+      <h3 class="case-section-heading">Widgets, the heart of the system</h3>
+      <p class="case-section-body">Operator dashboards were the original problem the system had to solve. Every operator configures their own workspace, so widgets had to be flexible without becoming unpredictable.</p>
+      <p class="case-section-body">Flexible doesn't mean unlimited. Total freedom on a dashboard produces chaos: misaligned widgets, broken rhythm, layouts that look different on every operator's screen for no good reason. The system had to give operators real control without letting the dashboard fall apart.</p>
+      <p class="case-section-body">The answer was a 12-column grid with widgets sized in fixed proportions: 1/4, 1/3, 1/2, 2/3, 3/4, and full width. Operators compose their dashboard out of these sizes, the rhythm of the grid stays intact, and the visual language of the platform stays consistent no matter how the workspace is configured.</p>
+      <img src="case studies/ds/grid.png" alt="12-column grid with fixed widget proportions" style="width:100%; height:auto; display:block; margin-top:32px;">
+
+      <p class="case-section-body">Each widget is a single component that adapts across the proportions it supports. A chart at 1/4 reads cleanly as a compact card. The same chart at full width opens up into a detailed view. Content reflows at each step, but it's the same component underneath, not six different ones.</p>
+      <p class="case-section-body">Every widget has light and dark variants, and the catalogue covers the full operational range: status indicators, time displays, command panels, file lists, telemetry charts, polar plots, world maps, globes, activity feeds, and data tables.</p>
+      <p class="case-section-body">The widget system is what makes the dashboard feel infinite to operators while staying finite for the team that builds it.</p>
+      <img src="case studies/ds/widget.png?v=2" alt="Widget at 1/4, 1/2 and full width; light and dark catalogue" style="width:100%; height:auto; display:block; margin-top:32px;">
+
+    </div>
+
+    <!-- Tables -->
+    <div class="case-section">
+      <h3 class="case-section-heading">Tables, the workhorse</h3>
+      <p class="case-section-body">Mission control runs on tables. Telemetry streams, command logs, contact schedules, mission timelines. The tables in the system are data-heavy by design: sortable columns, mixed cell types in the same row (timestamps, asset names, status icons, avatars, response indicators, comment counts), dense and default densities, light and dark.</p>
+      <p class="case-section-body">Tables sit inside the system as their own subsystem with a base layer (tableBase) and a content layer (tableContent), so a new table doesn't get built from zero. It gets composed.</p>
+      <img src="case studies/ds/table.png" alt="tableBase to tableContent to an assembled table; Command Queues view" style="width:100%; height:auto; display:block; margin-top:32px;">
+
+    </div>
+
+    <!-- Hardest part -->
+    <div class="case-section">
+      <h3 class="case-section-heading">The hardest part wasn't a component</h3>
+      <p class="case-section-body">The real challenge was building a system in parallel with a product whose scope kept expanding. Each new module brought a new question the existing components hadn't been designed for. A telemetry table behaves differently from a contact planning table. A command queue widget needs states a status widget doesn't. The system had to absorb new requirements without fragmenting, and every new module was a stress test of the decisions made in the last one.</p>
+      <p class="case-section-body">That's why the library is organised the way it is. Categories, not modules. Components, not screens. The system had to stay legible to a single designer keeping the whole thing in her head while the product grew underneath it.</p>
+    </div>
+
+    <!-- Working with development -->
+    <div class="case-section">
+      <h3 class="case-section-heading">Working with development</h3>
+      <p class="case-section-body">The front-end developer built the coded system in parallel with the Figma library, not after it. Components got reviewed in both directions, and the production interface maps to the Figma source one to one. After three years, the front-end developer is still shipping from the same library, with no designer on the team.</p>
+    </div>
+
+    <!-- Future -->
+    <div class="case-section">
+      <h3 class="case-section-heading">What would change next time</h3>
+      <p class="case-section-body">Two things.</p>
+      <p class="case-section-body">Tables would get more flexibility from the start. They're the most-used, most-strained part of the system, and the original structure made some configurations harder than they needed to be.</p>
+      <p class="case-section-body">The system itself would be designed differently. Less "how do we make one component cover the maximum number of cases" and more "how do we make it easy to add a new component when the product needs one." Reusability is a virtue until it becomes a constraint.</p>
+    </div>
+
+  </div>
+
+  <!-- ─── Footer ──────────────────────────────────────────────────── -->
+  <footer class="case-footer">
+    <p>© 2026 Jekaterina Senina</p>
+  </footer>
+
+  <script>
+  </script>
+
+  <script src="header.js" data-state="back"></script>
+</body>
+</html>

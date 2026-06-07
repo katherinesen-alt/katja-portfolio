@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Katja – Product Designer</title>
+  <link rel="stylesheet" href="fonts.css">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+
+    /* Small / UI text: Onest. Large / display text: Fraunces. */
+    body { font-family: 'Onest', system-ui, sans-serif; background: #ffffff; color: #040002; overflow-x: hidden; }
+    h1, h2, h3, h4,
+    .hero-typing, .headline, .ways-intro, .way-card-title, .section-title {
+      font-family: 'Fraunces', Georgia, serif;
+    }
+
+    /* ── Color system ────────────────────────────────── */
+    :root {
+      --accent: #1E35FF;
+      --black: #040002;
+      --white: #ffffff;
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 100dvh;
+      padding: 0 48px 20vh;
+      position: relative;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-typing {
+      font-size: clamp(48px, 8vw, 120px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: #040002;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 3px;
+      height: 0.85em;
+      background: #040002;
+      margin-left: 4px;
+      vertical-align: baseline;
+      position: relative;
+      top: 0.05em;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      font-weight: 300;
+      color: #040002;
+      margin-top: 32px;
+      letter-spacing: 0.01em;
+      max-width: 520px;
+      line-height: 1.5;
+    }
+
+    /* ── Reveal animation ─────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Tags – 3D glass capsule (3-div slice) ──── */
+    .tag {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 64px;
+      padding: 0 30px;
+      border-radius: 9999px;
+      overflow: hidden;
+      cursor: grab;
+      user-select: none;
+      white-space: nowrap;
+      transform-origin: center center;
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      background: #1E35FF;
+    }
+
+    .tag:active { cursor: grabbing; }
+
+    .project-card:hover img,
+    .project-card:hover video {
+      transform: scale(1.03);
+    }
+
+    .project-card p { transition: color 200ms ease; }
+    .project-card:hover p { color: #1E35FF !important; }
+
+    /* CTA pill button — desktop default height */
+    .cta-pill { height: 48px; }
+
+    /* ── Ways to work ──────────────────────────────────────── */
+    #ways-to-work { position: relative; z-index: 2; padding: 160px 48px 120px; }
+    .ways-inner { margin: 0 auto; }
+    .ways-head { margin-bottom: 48px; max-width: 720px; }
+    .ways-intro {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      color: #040002;
+      margin: 0;
+    }
+    .ways-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .way-card {
+      background: #EBEAEF;
+      border-radius: 8px;
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+    }
+    .way-card-title {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin: 0 0 16px;
+      color: #040002;
+    }
+    .way-card-tagline {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: #444;
+      margin: 0 0 32px;
+    }
+    .way-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 0 0 40px;
+    }
+    .way-card-tag {
+      display: inline-flex;
+      padding: 6px 12px;
+      background: #1E35FF;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #ffffff;
+      white-space: nowrap;
+    }
+    .way-card-cta { margin-top: auto; }
+    .way-card-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 48px;
+      padding: 0 32px;
+      border: none;
+      border-radius: 9999px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #ffffff;
+      text-decoration: none;
+      background: #040002;
+      transition: background 200ms ease, color 200ms ease;
+    }
+    .way-card-btn:hover { background: #1E35FF; color: #040002; }
+
+    /* ── Mobile menu (burger + overlay) ──────── */
+    #mobile-menu-btn {
+      display: none;
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: transparent;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+    #mobile-menu-btn .burger-line {
+      display: block;
+      width: 24px;
+      height: 2.5px;
+      background: #040002;
+      border-radius: 2px;
+      transform-origin: center;
+      transition: transform 350ms cubic-bezier(0.65, 0, 0.35, 1),
+                  opacity 200ms ease;
+    }
+    #mobile-menu-btn.open .burger-line:nth-child(1) {
+      transform: translateY(8.5px) rotate(45deg);
+    }
+    #mobile-menu-btn.open .burger-line:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0.4);
+    }
+    #mobile-menu-btn.open .burger-line:nth-child(3) {
+      transform: translateY(-8.5px) rotate(-45deg);
+    }
+
+    #mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: #ffffff;
+      z-index: 60;
+      display: flex;
+      flex-direction: column;
+      padding: 100px 24px 32px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 320ms ease, visibility 320ms;
+    }
+    #mobile-menu.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+    .mobile-menu-link {
+      font-size: 32px;
+      font-weight: 500;
+      color: #040002;
+      text-decoration: none;
+      padding: 16px 0;
+      letter-spacing: -0.01em;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 400ms cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 400ms cubic-bezier(0.16, 1, 0.3, 1),
+                  color 200ms ease;
+    }
+    #mobile-menu.open .mobile-menu-link {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #mobile-menu.open .mobile-menu-link:nth-of-type(1) { transition-delay: 120ms; }
+    #mobile-menu.open .mobile-menu-link:nth-of-type(2) { transition-delay: 180ms; }
+    #mobile-menu.open .mobile-menu-link:nth-of-type(3) { transition-delay: 240ms; }
+    .mobile-menu-link:hover { color: #1E35FF; }
+
+    /* ── Mobile ────────────────────────────────── */
+    @media (max-width: 768px) {
+      .hero {
+        justify-content: flex-start;
+        min-height: 100dvh;
+        padding: 110px 20px 0;
+      }
+      .hero-typing {
+        font-size: clamp(36px, 11vw, 64px);
+        line-height: 1.05;
+        min-height: 2.1em;
+      }
+      .hero-typing .static-text { display: block; }
+      .hero-sub { font-size: 16px; margin-top: 16px; max-width: 100%; }
+
+      /* Mobile header: hide nav links, button stretches, burger appears */
+      #site-header { padding: 14px 16px !important; z-index: 70 !important; }
+      #site-header > div:first-child { display: none !important; }
+      #site-header > div:last-child {
+        width: 100% !important;
+        gap: 24px !important;
+        flex-direction: row-reverse !important;
+      }
+      #site-header a[href*="tally.so"] {
+        flex: 1 !important;
+        height: 56px !important;
+        padding: 0 16px !important;
+        font-size: 16px !important;
+      }
+      #mobile-menu-btn { display: flex !important; }
+
+      /* Selected work section */
+      #selected-work { padding: 80px 20px 32px !important; }
+      #selected-work > div { gap: 36px !important; }
+
+      /* Stack cards vertically — image always on top */
+      .project-card {
+        display: flex !important;
+        flex-direction: column-reverse !important;
+        gap: 20px !important;
+      }
+      .project-card:nth-child(even) {
+        flex-direction: column !important;
+      }
+      .project-card p:first-child { font-size: 13px !important; }
+      .project-card p:last-child {
+        font-size: 28px !important;
+        font-weight: 600 !important;
+      }
+
+      /* Ways to work — mobile */
+      #ways-to-work { padding: 80px 20px 60px !important; }
+      .ways-head { margin-bottom: 40px !important; }
+      .ways-title { font-size: 48px !important; }
+      .ways-head { margin-bottom: 32px !important; }
+      .ways-intro { font-size: 22px !important; }
+      .ways-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+      .way-card { padding: 32px 28px !important; }
+      .way-card-title { font-size: 22px !important; }
+      .way-card-tagline { margin-bottom: 24px !important; }
+      .way-card-tags { margin-bottom: 32px !important; }
+    }
+
+    /* ── Selected work: case-study grid (2-up feature, then 3-up) ── */
+    .work-feature {
+      display: grid; grid-template-columns: 1fr 1fr;
+      column-gap: 48px; row-gap: 80px; margin-bottom: 80px;
+    }
+    .work-rest {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      column-gap: 48px; row-gap: 80px;
+    }
+    .work-card { display: block; text-decoration: none; color: inherit; }
+    .work-card .thumb {
+      position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 0;
+      background: #e7e7df; display: flex; align-items: center; justify-content: center;
+    }
+    .work-card img, .work-card video {
+      width: 100%; height: 100%; object-fit: cover; object-position: center;
+      display: block; transition: transform 600ms cubic-bezier(0.16,1,0.3,1);
+    }
+    .work-card:hover img, .work-card:hover video { transform: scale(1.03); }
+    .work-card .tags {
+      font-size: 13px; font-weight: 400; color: #999; letter-spacing: 0.02em;
+      margin: 22px 0 10px;
+    }
+    .work-card .headline {
+      font-size: clamp(18px, 1.35vw, 22px); font-weight: 500; letter-spacing: -0.01em;
+      line-height: 1.3; margin: 0; color: #040002; transition: color 200ms ease;
+    }
+    .work-card:hover .headline { color: #1E35FF; }
+
+    /* Brand marquee: single auto-scrolling row, white logos on black */
+    #selected-brands { background: #040002; }
+    .brands-marquee { overflow: hidden; width: 100%; }
+    .brands-track {
+      display: flex; width: max-content;
+      animation: brand-marquee 45s linear infinite;
+    }
+    .brands-marquee:hover .brands-track { animation-play-state: paused; }
+    .brands-track .brand-logo {
+      flex: 0 0 auto; display: flex; align-items: center; justify-content: center;
+      width: 150px; padding: 0 36px;
+    }
+    .brands-track img {
+      max-height: 30px; max-width: 100%; width: auto; height: auto;
+      object-fit: contain; filter: brightness(0) invert(1); display: block;
+    }
+    @keyframes brand-marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    @media (max-width: 980px) {
+      .work-rest { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .work-feature, .work-rest { grid-template-columns: 1fr; gap: 48px; margin-bottom: 48px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header injected by header.js (shared component, state="home") -->
+
+  <section class="hero">
+    <div class="hero-left">
+      <h1 class="hero-typing">
+        <span class="static-text">I'm </span><span id="typed"></span><span class="cursor"></span>
+      </h1>
+      <p class="hero-sub">I work in the product, not around it. I find what makes it confusing, and bring the judgment that tools can't replace.</p>
+    </div>
+  </section>
+
+  <!-- Tags layer — covers entire page -->
+  <div id="tags-layer" style="position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:5;">
+    <div class="tag" style="pointer-events:auto;">SaaS Interfaces</div>
+    <div class="tag" style="pointer-events:auto;">Design Systems</div>
+    <div class="tag" style="pointer-events:auto;">Web &amp; Mobile</div>
+    <div class="tag" style="pointer-events:auto;">Data-Driven Products</div>
+    <div class="tag" style="pointer-events:auto;">UX Audit</div>
+    <div class="tag" style="pointer-events:auto;">Consulting</div>
+  </div>
+
+  <!-- ─── Selected Work ────────────────────────────────────────────── -->
+  <section id="selected-work" style="position:relative; z-index:2; padding:120px 48px 160px;">
+
+    <!-- First two: large 2-up -->
+    <div class="work-feature">
+      <a href="case-mcs.html" class="reveal work-card">
+        <div class="thumb"><img src="case studies/mcs/mcs-cover.jpg" alt="Spaceit MCS"></div>
+        <p class="tags">SaaS, Design System</p>
+        <p class="headline">Full product design of a satellite mission control platform</p>
+      </a>
+
+      <a href="case-mcs-design-system.html" class="reveal work-card">
+        <div class="thumb"><img src="case studies/ds/ds-cover.png?v=2" alt="MCS Design System"></div>
+        <p class="tags">Design System, SaaS</p>
+        <p class="headline">A design system built in parallel with the product</p>
+      </a>
+    </div>
+
+    <!-- The rest: 3-up -->
+    <div class="work-rest">
+      <a href="case-spaceit-web.html" class="reveal work-card">
+        <div class="thumb"><img src="case studies/spaceit web/spaceit-web-cover.jpg" alt="Spaceit Website"></div>
+        <p class="tags">SaaS, Web Design</p>
+        <p class="headline">Rebuilding the public face of a space-tech startup</p>
+      </a>
+
+      <a href="case-sqence.html" class="reveal work-card">
+        <div class="thumb"><img src="case studies/sqence/sqence-cover.jpg" alt="SQENCE" style="object-position:top;"></div>
+        <p class="tags">Social Media, Mobile App</p>
+        <p class="headline">Product design for a social media app</p>
+      </a>
+
+      <a href="case-pleier.html" class="reveal work-card">
+        <div class="thumb"><img src="case studies/pleier/pleier-cover.jpg" alt="PLEIER"></div>
+        <p class="tags">Lifestyle, Mobile App</p>
+        <p class="headline">Audio app for one of the Baltics' largest media groups</p>
+      </a>
+
+      <a href="case-soundfr.html" class="reveal work-card">
+        <div class="thumb"><video src="case studies/soundfr/intro.mp4" autoplay loop muted playsinline></video></div>
+        <p class="tags">Healthcare, AI Tools, Web</p>
+        <p class="headline">A minimalist site for a hearing-loss product</p>
+      </a>
+
+      <a href="case-ecommerce.html" class="reveal work-card">
+        <div class="thumb"><img src="toimib1.jpg" alt="Toimib e-commerce"></div>
+        <p class="tags">E-Commerce, Web Design, MVP</p>
+        <p class="headline">A full e-commerce experience for verified products</p>
+      </a>
+    </div>
+
+  </section>
+
+  <!-- ─── Selected brands ──────────────────────────────────────────── -->
+  <section id="selected-brands" style="position:relative; z-index:2; background:#040002; padding:100px 0;">
+    <p class="reveal section-title" style="font-size:clamp(28px, 3vw, 40px); font-weight:500; margin:0 0 64px; padding:0 48px; letter-spacing:-0.02em; line-height:1.2; color:#ffffff;">Selected brands I've designed for</p>
+    <div class="brands-marquee reveal">
+      <div class="brands-track">
+        <!-- set 1 -->
+        <div class="brand-logo"><img src="logos/spaceit.svg" alt="Spaceit"></div>
+        <div class="brand-logo"><img src="logos/postimees-grupp.svg" alt="Postimees Grupp"></div>
+        <div class="brand-logo"><img src="logos/merko.svg" alt="Merko"></div>
+        <div class="brand-logo"><img src="logos/eriarstikeskus.svg" alt="Eriarstikeskus"></div>
+        <div class="brand-logo"><img src="logos/utilitas.svg" alt="Utilitas"></div>
+        <div class="brand-logo"><img src="logos/evocon.svg" alt="Evocon"></div>
+        <div class="brand-logo"><img src="logos/cerebrum.svg" alt="Cerebrum"></div>
+        <div class="brand-logo"><img src="logos/quantum.svg" alt="Quantum"></div>
+        <div class="brand-logo"><img src="logos/scr.svg" alt="SCR"></div>
+        <div class="brand-logo"><img src="logos/sqence.svg" alt="SQENCE"></div>
+        <div class="brand-logo"><img src="logos/soundfr.svg" alt="Soundfr"></div>
+        <div class="brand-logo"><img src="logos/toimib.svg" alt="Toimib"></div>
+        <div class="brand-logo"><img src="logos/rethink.svg" alt="Rethink"></div>
+        <!-- set 2 (duplicate for seamless loop) -->
+        <div class="brand-logo" aria-hidden="true"><img src="logos/spaceit.svg" alt=""></div>
+        <div class="brand-logo" aria-hidden="true"><img src="logos/postimees-grupp.svg" alt=""></div>
+        <div class="brand-logo" aria-hidden="true"><img src="logos/merko.svg" alt=""></div>
+        <div class="brand-logo" aria-hidden="true"><img src="logos/eriarstikeskus.svg" alt=""></div>
+        <div class="brand-logo" aria-hidden="true"><img src="logos/utilitas.svg" alt=""></div>
+        <div class="brand-logo" aria-hidden="true"><img src="logos/evocon.svg" alt=""></div>
+        <div class="brand-logo" aria-hidden="true"><img src="logos/cerebrum.svg" alt=""></div>
+        <div class="brand-logo" aria-hidden="true"><img src="logos/quantum.svg" alt=""></div>
+        <div class="brand-logo" aria-hidden="true"><img src="logos/scr.svg" alt=""></div>
+        <div class="brand-logo" aria-hidden="true"><img src="logos/sqence.svg" alt=""></div>
+        <div class="brand-logo" aria-hidden="true"><img src="logos/soundfr.svg" alt=""></div>
+        <div class="brand-logo" aria-hidden="true"><img src="logos/toimib.svg" alt=""></div>
+        <div class="brand-logo" aria-hidden="true"><img src="logos/rethink.svg" alt=""></div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="padding:40px 48px; text-align:center;">
+    <p style="font-size:13px; font-weight:300; color:#999; margin:0;">© 2026 Jekaterina Senina</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.20.0/matter.min.js"></script>
+
+  <script>
+    // ── Typing animation ───────────────────────────────
+    (function() {
+      var words = [
+        { text: 'Katja.', color: '#040002' },
+        { text: 'a product designer.', color: '#040002' }
+      ];
+      var el = document.getElementById('typed');
+      var wordIndex = 0;
+      var charIndex = 0;
+      var isDeleting = false;
+      var typeSpeed = 90;
+      var deleteSpeed = 60;
+      var pauseAfterType = 1800;
+      var pauseAfterDelete = 400;
+
+      function tick() {
+        var current = words[wordIndex];
+        el.style.color = current.color;
+        if (!isDeleting) {
+          var sub = current.text.substring(0, charIndex + 1);
+          if (sub.endsWith('.')) {
+            el.innerHTML = '<span style="color:' + current.color + '">' + sub.slice(0,-1) + '</span><span style="color:#040002">.</span>';
+          } else {
+            el.innerHTML = '<span style="color:' + current.color + '">' + sub + '</span>';
+          }
+          charIndex++;
+          if (charIndex === current.text.length) {
+            setTimeout(function() { isDeleting = true; tick(); }, pauseAfterType);
+            return;
+          }
+          setTimeout(tick, typeSpeed);
+        } else {
+          var sub2 = current.text.substring(0, charIndex - 1);
+          if (sub2.endsWith('.')) {
+            el.innerHTML = '<span style="color:' + current.color + '">' + sub2.slice(0,-1) + '</span><span style="color:#040002">.</span>';
+          } else {
+            el.innerHTML = '<span style="color:' + current.color + '">' + sub2 + '</span>';
+          }
+          charIndex--;
+          if (charIndex === 0) {
+            isDeleting = false;
+            wordIndex = (wordIndex + 1) % words.length;
+            setTimeout(tick, pauseAfterDelete);
+            return;
+          }
+          setTimeout(tick, deleteSpeed);
+        }
+      }
+      setTimeout(tick, 800);
+    })();
+
+    // ── Reveal on scroll ────────────────────────────────
+    (function() {
+      var reveals = document.querySelectorAll('.reveal');
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          var siblings = Array.from(el.parentElement.children).filter(function(c) { return c.classList.contains('reveal'); });
+          var index = siblings.indexOf(el);
+          el.style.transitionDelay = (index * 120) + 'ms';
+          el.classList.add('visible');
+          observer.unobserve(el);
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      reveals.forEach(function(el) { observer.observe(el); });
+    })();
+
+    // ── Matter.js physics (full-page gravity) ──────────
+    (function() {
+      var Engine = Matter.Engine,
+          World = Matter.World,
+          Bodies = Matter.Bodies,
+          Body = Matter.Body,
+          Runner = Matter.Runner,
+          Events = Matter.Events;
+
+      var engine = Engine.create();
+      var world = engine.world;
+      engine.gravity.y = 1.8;
+
+      var runner = Runner.create();
+      Runner.run(runner, engine);
+
+      var vw = window.innerWidth;
+      var vh = window.innerHeight;
+      var pageH = document.documentElement.scrollHeight;
+
+      // Walls — floor follows viewport bottom, walls span full page
+      var wallThickness = 60;
+      var floorY = window.scrollY + vh;
+      var floor = Bodies.rectangle(vw / 2, floorY + wallThickness / 2 - 10, vw * 2, wallThickness, { isStatic: true, friction: 0.8, restitution: 0.1 });
+      var wallLeft = Bodies.rectangle(-wallThickness / 2, pageH / 2, wallThickness, pageH * 2, { isStatic: true });
+      var wallRight = Bodies.rectangle(vw + wallThickness / 2, pageH / 2, wallThickness, pageH * 2, { isStatic: true });
+      World.add(world, [floor, wallLeft, wallRight]);
+
+      // Obstacle bodies from content blocks
+      var obstacles = [];
+      function buildObstacles() {
+        obstacles.forEach(function(ob) { World.remove(world, ob); });
+        obstacles = [];
+
+        // Each project card is a solid block — pills land on its top edge.
+        // Use offsetTop chain (ignores CSS transforms like .reveal translateY)
+        // so obstacle aligns with post-reveal natural position, not pre-reveal.
+        var cards = document.querySelectorAll('#selected-work .thumb');
+        cards.forEach(function(card) {
+          var top = 0, left = 0, node = card;
+          while (node) {
+            top += node.offsetTop || 0;
+            left += node.offsetLeft || 0;
+            node = node.offsetParent;
+          }
+          var w = card.offsetWidth;
+          var h = card.offsetHeight;
+          var ob = Bodies.rectangle(
+            left + w / 2,
+            top + h / 2,
+            w, h,
+            { isStatic: true, friction: 0.8, restitution: 0.05 }
+          );
+          World.add(world, ob);
+          obstacles.push(ob);
+        });
+      }
+
+      // Build after layout settles, then again once images load
+      setTimeout(buildObstacles, 500);
+      window.addEventListener('load', buildObstacles);
+
+      // Floor follows viewport bottom on scroll
+      window.addEventListener('scroll', function() {
+        var newFloorY = window.scrollY + vh;
+        Body.setPosition(floor, { x: vw / 2, y: newFloorY + wallThickness / 2 - 10 });
+      });
+
+      window.addEventListener('resize', function() {
+        vw = window.innerWidth;
+        vh = window.innerHeight;
+        pageH = document.documentElement.scrollHeight;
+        Body.setPosition(floor, { x: vw / 2, y: window.scrollY + vh + wallThickness / 2 - 10 });
+        Body.setPosition(wallLeft, { x: -wallThickness / 2, y: pageH / 2 });
+        Body.setPosition(wallRight, { x: vw + wallThickness / 2, y: pageH / 2 });
+        buildObstacles();
+      });
+
+      // Create physics bodies for each tag
+      var tagEls = Array.from(document.querySelectorAll('.tag'));
+      var tagBodies = [];
+      var startAngles = [-0.4, 0.25, -0.14, 0.5, -0.3, 0.1, -0.2, 0.35, -0.45, 0.18, -0.28];
+
+      tagEls.forEach(function(el, i) {
+        var shape = el.dataset.shape || 'pill';
+        var w = el.offsetWidth;
+        var h = el.offsetHeight;
+        var spawnX = vw - 400 + (Math.random() - 0.5) * 300;
+        // Clamp inside viewport so pills can't spawn past left wall (mobile)
+        spawnX = Math.max(w / 2 + 10, Math.min(vw - w / 2 - 10, spawnX));
+        var spawnY = -80 - i * 100;
+        var opts = {
+          friction: 0.6,
+          frictionAir: 0.02,
+          restitution: 0.2,
+          density: 0.002,
+          angle: startAngles[i] || 0
+        };
+        var body;
+        if (shape === 'circle') {
+          body = Bodies.circle(spawnX, spawnY, w / 2, opts);
+        } else if (shape === 'pill') {
+          opts.chamfer = { radius: h / 2 };
+          body = Bodies.rectangle(spawnX, spawnY, w, h, opts);
+        } else {
+          body = Bodies.rectangle(spawnX, spawnY, w, h, opts);
+        }
+        var free = shape !== 'pill';
+        if (free) Body.setAngularVelocity(body, (Math.random() - 0.5) * 0.25);
+        tagBodies.push({ el: el, body: body, free: free });
+        World.add(world, body);
+      });
+
+      // Manual drag — supports both mouse and touch, accounts for scroll offset
+      tagBodies.forEach(function(tb) {
+        function startDrag(clientX, clientY) {
+          tb.el.style.cursor = 'grabbing';
+          var offset = {
+            x: clientX - tb.body.position.x,
+            y: (clientY + window.scrollY) - tb.body.position.y
+          };
+          return {
+            move: function(cx, cy) {
+              var targetX = cx - offset.x;
+              var targetY = (cy + window.scrollY) - offset.y;
+              Body.setVelocity(tb.body, {
+                x: (targetX - tb.body.position.x) * 0.4,
+                y: (targetY - tb.body.position.y) * 0.4
+              });
+            },
+            end: function() { tb.el.style.cursor = 'grab'; }
+          };
+        }
+
+        tb.el.addEventListener('mousedown', function(e) {
+          e.preventDefault();
+          var d = startDrag(e.clientX, e.clientY);
+          function onMove(ev) { d.move(ev.clientX, ev.clientY); }
+          function onUp() {
+            d.end();
+            document.removeEventListener('mousemove', onMove);
+            document.removeEventListener('mouseup', onUp);
+          }
+          document.addEventListener('mousemove', onMove);
+          document.addEventListener('mouseup', onUp);
+        });
+
+        tb.el.addEventListener('touchstart', function(e) {
+          if (!e.touches.length) return;
+          e.preventDefault();
+          var t = e.touches[0];
+          var d = startDrag(t.clientX, t.clientY);
+          function onMove(ev) {
+            if (!ev.touches.length) return;
+            ev.preventDefault();
+            d.move(ev.touches[0].clientX, ev.touches[0].clientY);
+          }
+          function onUp() {
+            d.end();
+            document.removeEventListener('touchmove', onMove);
+            document.removeEventListener('touchend', onUp);
+            document.removeEventListener('touchcancel', onUp);
+          }
+          document.addEventListener('touchmove', onMove, { passive: false });
+          document.addEventListener('touchend', onUp);
+          document.addEventListener('touchcancel', onUp);
+        }, { passive: false });
+      });
+
+      // Clamp angle + cap fall speed + push pills out of obstacles
+      var maxAngle = Math.PI * 0.4;
+      var maxFallSpeed = 18;
+      Events.on(engine, 'beforeUpdate', function() {
+        tagBodies.forEach(function(tb) {
+          // Text pills stay readable (clamped near-upright); pure forms tumble freely.
+          if (!tb.free) {
+            var a = tb.body.angle % (Math.PI * 2);
+            if (a > Math.PI) a -= Math.PI * 2;
+            if (a < -Math.PI) a += Math.PI * 2;
+            if (a > maxAngle) {
+              Body.setAngle(tb.body, maxAngle);
+              Body.setAngularVelocity(tb.body, tb.body.angularVelocity * -0.3);
+            } else if (a < -maxAngle) {
+              Body.setAngle(tb.body, -maxAngle);
+              Body.setAngularVelocity(tb.body, tb.body.angularVelocity * -0.3);
+            }
+          }
+          if (tb.body.velocity.y > maxFallSpeed) {
+            Body.setVelocity(tb.body, { x: tb.body.velocity.x, y: maxFallSpeed });
+          }
+          var pb = tb.body.bounds;
+          var px = tb.body.position.x;
+          var py = tb.body.position.y;
+          for (var i = 0; i < obstacles.length; i++) {
+            var obB = obstacles[i].bounds;
+            if (px > obB.min.x && px < obB.max.x && py > obB.min.y && py < obB.max.y) {
+              var bottomOffset = pb.max.y - py;
+              Body.setPosition(tb.body, {
+                x: px,
+                y: obB.min.y - bottomOffset - 1
+              });
+              Body.setVelocity(tb.body, { x: tb.body.velocity.x * 0.3, y: 0 });
+              break;
+            }
+          }
+        });
+      });
+
+      // Render — positions are in page coordinates, offset by scroll for fixed layer
+      (function render() {
+        var scrollY = window.scrollY;
+        tagBodies.forEach(function(tb) {
+          var pos = tb.body.position;
+          var angle = tb.body.angle;
+          var w = tb.el.offsetWidth;
+          var h = tb.el.offsetHeight;
+          tb.el.style.left = (pos.x - w / 2) + 'px';
+          tb.el.style.top = (pos.y - h / 2 - scrollY) + 'px';
+          tb.el.style.transform = 'rotate(' + angle + 'rad)';
+        });
+        requestAnimationFrame(render);
+      })();
+    })();
+
+  </script>
+
+  <script src="header.js" data-state="home"></script>
+
+</body>
+</html>
