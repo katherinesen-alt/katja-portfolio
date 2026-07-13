@@ -57,6 +57,18 @@
       color: #444;
       max-width: 720px;
     }
+    .case-section-body + .case-section-body { margin-top: 24px; }
+    .case-section-heading {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      color: #040002;
+      margin-top: 48px;
+      margin-bottom: 24px;
+      max-width: 720px;
+    }
+    .case-section-heading:first-child { margin-top: 0; }
 
     .case-footer { padding: 40px 48px; text-align: center; }
     .case-footer p { font-size: 13px; font-weight: 300; color: #999; }
@@ -71,6 +83,8 @@
       .case-statement { font-size: 20px; line-height: 1.4; margin-top: 40px; }
       .case-section { margin-top: 40px; }
       .case-section-body { font-size: 16px; line-height: 1.6; }
+      .case-section-heading { font-size: 22px; margin-top: 32px; margin-bottom: 20px; }
+      .case-section-body + .case-section-body { margin-top: 20px; }
       .case-img { margin-top: 32px; }
 
       #site-header { padding: 14px 20px !important; }
@@ -95,15 +109,19 @@
 
     <!-- Hero -->
     <div class="case-header">
-      <h1 class="case-hero-text">Soundfr. Minimalist website for a product helping people with hearing loss.</h1>
+      <h1 class="case-hero-text">Designing the MVP mobile experience for a smart hearing device</h1>
       <div class="case-meta-row">
         <div class="case-meta-item">
           <span class="case-meta-label">Type</span>
-          <span class="case-meta-value">Healthcare, AI Tools, Web Design</span>
+          <span class="case-meta-value">Healthcare, AI Tools, Mobile App</span>
         </div>
         <div class="case-meta-item">
           <span class="case-meta-label">Role</span>
-          <span class="case-meta-value">UI/UX Designer</span>
+          <span class="case-meta-value">Product designer</span>
+        </div>
+        <div class="case-meta-item">
+          <span class="case-meta-label">Platform</span>
+          <span class="case-meta-value">iOS &amp; Android</span>
         </div>
       </div>
     </div>
@@ -112,11 +130,49 @@
       <video src="case studies/soundfr/intro.mp4" autoplay loop muted playsinline style="width:100%; display:block; border-radius: 0;"></video>
     </div>
 
-    <p class="case-statement">Soundfr built a smart device that detects important sounds and sends alerts to a phone or smartwatch.</p>
+    <p class="case-statement">Soundfr is building a smart device that helps people with hearing loss stay aware of conversations and important sounds. While the long-term vision includes multiple features, this MVP focused on one essential capability — real-time speech-to-text transcription through the companion app.</p>
 
     <div class="case-section">
-      <p class="case-section-body">The product solves a real problem, but the website didn't communicate it: visually overloaded, no clear entry point, and hard to navigate for the very audience it was designed for.</p>
-      <p class="case-section-body" style="margin-top:24px;">People with hearing loss process information differently. Visual clarity is not just aesthetics for them, it is a necessity. The redesign was built around this: minimal elements, a clear sequence from the founder's story to the problem and the solution, nothing to distract.</p>
+      <p class="case-section-body">The project came with an unusual challenge. The product vision was much bigger than what could realistically be built at this stage, so instead of designing the full experience, we focused on launching a single feature that could already deliver value to users.</p>
+      <p class="case-section-body">I joined the project with a rough prototype and three days to turn it into a development-ready MVP.</p>
+    </div>
+
+    <div class="case-section">
+      <h3 class="case-section-heading">From a rough idea to a product people can actually use</h3>
+      <p class="case-section-body">The initial concept explained what the feature should do, but not how people would actually use it. I redesigned the experience from the ground up, defining navigation, screen hierarchy, interactions, recording states, and everything needed to make the feature feel like a complete product rather than just a prototype.</p>
+      <p class="case-section-body">Along the way, I also proposed an archive system, allowing users to organise and manage their recordings instead of keeping them in one endless list.</p>
+
+      <div class="case-img">
+        <img src="case studies/soundfr/screen2.jpg" alt="Soundfr app screens">
+      </div>
+    </div>
+
+    <div class="case-section">
+      <h3 class="case-section-heading">Designing for people who experience interfaces differently</h3>
+      <p class="case-section-body">People with hearing loss rely on visual information in ways most users never have to think about. That affected every design decision. Instead of adding more functionality, I focused on making every interaction obvious. The interface provides continuous visual feedback while recording, uses predictable interactions, and removes anything that could distract users from the primary task.</p>
+      <p class="case-section-body">The result is an experience that feels calm, focused and easy to trust.</p>
+    </div>
+
+    <div class="case-section">
+      <h3 class="case-section-heading">One feature. A complete experience.</h3>
+      <p class="case-section-body">Although the MVP includes only one core capability, it still needed to feel like a real product. The experience guides users from device setup to live transcription, saving recordings, and finding them later through the archive, without unnecessary steps or complicated navigation. The goal wasn't to design more screens. It was to make the first version feel complete.</p>
+
+      <div class="case-img">
+        <img src="case studies/soundfr/Scene12.jpg" alt="Soundfr app recording screen">
+      </div>
+    </div>
+
+    <div class="case-section">
+      <h3 class="case-section-heading">Building a foundation instead of just shipping screens</h3>
+      <p class="case-section-body">Working under a three-day deadline meant every design decision had to be intentional. Alongside the interface, I built a reusable component library, designed interaction states and edge cases, and prepared everything for developer handoff.</p>
+      <p class="case-section-body">The MVP is now live on both iOS and Android.</p>
+    </div>
+
+    <div class="case-section">
+      <h3 class="case-section-heading">A product deserves a website that explains it</h3>
+      <p class="case-section-body">Before designing the companion app, I also redesigned Soundfr's marketing website.<br>
+        The previous website didn't clearly communicate what the product was or what problem it solved. Many visitors struggled to understand what Soundfr actually offered, making it difficult to build trust with both potential customers and investors.<br>
+        I restructured the content, clarified the messaging, and created a cleaner experience that explains the product before asking people to believe in it.</p>
 
       <!-- Before/After slider -->
       <div class="compare-container" style="margin-top:48px; position:relative; width:100%; aspect-ratio:1920/4675; border-radius: 0; overflow:hidden; cursor:col-resize; user-select:none;">
@@ -135,14 +191,6 @@
       </div>
     </div>
 
-    <div class="case-img">
-      <img src="case studies/soundfr/ipad-screen.jpg" alt="Soundfr iPad">
-    </div>
-
-    <div class="case-img">
-      <img src="case studies/soundfr/phone.jpg" alt="Soundfr phone">
-    </div>
-
   </div>
 
   <!-- ─── Footer ──────────────────────────────────────────────────── -->
@@ -151,7 +199,6 @@
   </footer>
 
   <script>
-
     // Before/After compare slider
     (function() {
       var container = document.querySelector('.compare-container');

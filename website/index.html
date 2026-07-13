@@ -66,7 +66,7 @@
       color: #040002;
       margin-top: 32px;
       letter-spacing: 0.01em;
-      max-width: 520px;
+      max-width: 650px;
       line-height: 1.5;
     }
 
@@ -80,6 +80,50 @@
     .reveal.visible {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    /* ── Drag hint — handwritten note + arrow, points at the settled pills ── */
+    #drag-hint {
+      position: fixed;
+      right: 170px;
+      bottom: 210px;
+      z-index: 6;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    #drag-hint.is-visible { opacity: 1; transform: translateY(0); }
+    .drag-hint-text {
+      font-family: 'Caveat', cursive;
+      font-weight: 600;
+      font-size: 26px;
+      line-height: 1.25;
+      color: #1E35FF;
+      transform: rotate(-3deg);
+      text-align: right;
+      white-space: nowrap;
+    }
+    .drag-hint-sign {
+      font-family: 'Caveat', cursive;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 1;
+      color: #1E35FF;
+      margin-top: 8px;
+      margin-right: 6px;
+      transform: rotate(-6deg);
+    }
+    .drag-hint-arrow { margin-top: 6px; margin-right: 26px; display: block; }
+
+    @media (max-width: 768px) {
+      #drag-hint { right: 24px; bottom: 200px; }
+      .drag-hint-text { font-size: 22px; }
+      .drag-hint-sign { font-size: 20px; }
+      .drag-hint-arrow { width: 56px; height: 76px; margin-right: 18px; }
     }
 
     /* ── Tags – 3D glass capsule (3-div slice) ──── */
@@ -396,18 +440,30 @@
       <h1 class="hero-typing">
         <span class="static-text">I'm </span><span id="typed"></span><span class="cursor"></span>
       </h1>
-      <p class="hero-sub">I work in the product, not around it. I find what makes it confusing, and bring the judgment that tools can't replace.</p>
+      <p class="hero-sub">I design products that make complex systems feel obvious. Tools can speed up execution, but they can't replace judgment. Not every idea makes a product better. Knowing which ones to challenge, simplify or leave behind is where good product design creates the most value.</p>
     </div>
   </section>
 
   <!-- Tags layer — covers entire page -->
   <div id="tags-layer" style="position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:5;">
+    <div class="tag" style="pointer-events:auto;">Complex Products</div>
+    <div class="tag" style="pointer-events:auto;">Data-Driven Products</div>
     <div class="tag" style="pointer-events:auto;">SaaS Interfaces</div>
     <div class="tag" style="pointer-events:auto;">Design Systems</div>
-    <div class="tag" style="pointer-events:auto;">Web &amp; Mobile</div>
-    <div class="tag" style="pointer-events:auto;">Data-Driven Products</div>
-    <div class="tag" style="pointer-events:auto;">UX Audit</div>
-    <div class="tag" style="pointer-events:auto;">Consulting</div>
+    <div class="tag" style="pointer-events:auto;">Expert Reviews</div>
+    <div class="tag" style="pointer-events:auto;">Mission-Critical Software</div>
+  </div>
+
+  <!-- Drag hint — fades in once the pills settle, gone for good on first throw -->
+  <div id="drag-hint" aria-hidden="true">
+    <span class="drag-hint-text">You can throw the pills around.<br>Have fun.</span>
+    <span class="drag-hint-sign">K.</span>
+    <svg class="drag-hint-arrow" width="72" height="98" viewBox="0 0 72 98" fill="none">
+      <path d="M56 6C62 30 58 54 42 78"
+            stroke="#1E35FF" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <path d="M40 56C40 68 41 76 42 80M42 80C46 74 51 69 57 65"
+            stroke="#1E35FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>
   </div>
 
   <!-- ─── Selected Work ────────────────────────────────────────────── -->
@@ -430,22 +486,10 @@
 
     <!-- The rest: 3-up -->
     <div class="work-rest">
-      <a href="case-spaceit-web.html" class="reveal work-card">
-        <div class="thumb"><img src="case studies/spaceit web/spaceit-web-cover.jpg" alt="Spaceit Website"></div>
-        <p class="tags">SaaS, Web Design</p>
-        <p class="headline">Rebuilding the public face of a space-tech startup</p>
-      </a>
-
       <a href="case-sqence.html" class="reveal work-card">
         <div class="thumb"><img src="case studies/sqence/sqence-cover.jpg" alt="SQENCE" style="object-position:top;"></div>
         <p class="tags">Social Media, Mobile App</p>
         <p class="headline">Product design for a social media app</p>
-      </a>
-
-      <a href="case-pleier.html" class="reveal work-card">
-        <div class="thumb"><img src="case studies/pleier/pleier-cover.jpg" alt="PLEIER"></div>
-        <p class="tags">Lifestyle, Mobile App</p>
-        <p class="headline">Audio app for one of the Baltics' largest media groups</p>
       </a>
 
       <a href="case-soundfr.html" class="reveal work-card">
@@ -454,10 +498,22 @@
         <p class="headline">A minimalist site for a hearing-loss product</p>
       </a>
 
+      <a href="case-pleier.html" class="reveal work-card">
+        <div class="thumb"><img src="case studies/pleier/pleier-cover.jpg" alt="PLEIER"></div>
+        <p class="tags">Lifestyle, Mobile App</p>
+        <p class="headline">Audio app for one of the Baltics' largest media groups</p>
+      </a>
+
       <a href="case-ecommerce.html" class="reveal work-card">
         <div class="thumb"><img src="toimib1.jpg" alt="Toimib e-commerce"></div>
         <p class="tags">E-Commerce, Web Design, MVP</p>
         <p class="headline">A full e-commerce experience for verified products</p>
+      </a>
+
+      <a href="case-spaceit-web.html" class="reveal work-card">
+        <div class="thumb"><img src="case studies/spaceit web/spaceit-web-cover.jpg" alt="Spaceit Website"></div>
+        <p class="tags">SaaS, Web Design</p>
+        <p class="headline">Rebuilding the public face of a space-tech startup</p>
       </a>
     </div>
 
@@ -687,9 +743,43 @@
         World.add(world, body);
       });
 
+      // Drag hint — appears once the pills come to rest. Scrolling away only hides it;
+      // it comes back on the way up. Only actually throwing a pill retires it for good.
+      var hintEl = document.getElementById('drag-hint');
+      var hintState = 'waiting'; // waiting → active → dismissed (dismissed is permanent)
+      var hintClock = 0;
+
+      function dismissHint() {
+        if (hintState === 'dismissed' || !hintEl) return;
+        hintState = 'dismissed';
+        hintEl.classList.remove('is-visible');
+      }
+
+      function updateHint() {
+        if (hintState === 'dismissed' || !hintEl) return;
+
+        if (hintState === 'waiting') {
+          // Settled = every pill is barely moving and has actually landed (not still falling in).
+          var settled = tagBodies.every(function(tb) {
+            return tb.body.speed < 0.4 && tb.body.position.y > window.scrollY + vh * 0.35;
+          });
+          if (!settled) { hintClock = 0; return; }
+          hintClock++;
+          if (hintClock <= 40) return; // ~0.7s of calm, so a pause mid-bounce doesn't trigger it
+          hintState = 'active';
+        }
+
+        // Active: only lives at the top of the page. It's a fixed element, so if it
+        // lingered it would just ride along with the scroll — fade it out as soon as
+        // the page moves, and bring it back when the user returns to the top.
+        var atTop = window.scrollY < 60;
+        hintEl.classList.toggle('is-visible', atTop);
+      }
+
       // Manual drag — supports both mouse and touch, accounts for scroll offset
       tagBodies.forEach(function(tb) {
         function startDrag(clientX, clientY) {
+          dismissHint();
           tb.el.style.cursor = 'grabbing';
           var offset = {
             x: clientX - tb.body.position.x,
@@ -794,6 +884,7 @@
           tb.el.style.top = (pos.y - h / 2 - scrollY) + 'px';
           tb.el.style.transform = 'rotate(' + angle + 'rad)';
         });
+        updateHint();
         requestAnimationFrame(render);
       })();
     })();
