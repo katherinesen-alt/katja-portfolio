@@ -25,16 +25,31 @@
       "#mobile-menu.open{opacity:1;visibility:visible;pointer-events:auto;}",
       "#mobile-menu a{font-family:'Onest',system-ui,sans-serif;font-size:32px;font-weight:500;color:#040002;text-decoration:none;padding:16px 0;letter-spacing:-.01em;transition:color 200ms ease;}",
       "#mobile-menu a:hover{color:#1E35FF;}",
-      "@media(max-width:768px){#site-header{padding:14px 16px;z-index:70;}#site-header .hdr-nav{display:none;}#site-header .cta-pill{height:40px;padding:0 20px;font-size:14px;}#mobile-menu-btn{display:flex;}}"
+      "#site-header .hdr-back-icon{display:none;width:40px;height:40px;flex-shrink:0;align-items:center;justify-content:center;color:#040002;}",
+      "#site-header .hdr-back-icon:hover{color:#1E35FF;}",
+      "@media(max-width:768px){#site-header{padding:14px 16px;z-index:70;}#site-header .hdr-nav{display:none;}#site-header .cta-pill{height:40px;padding:0 20px;font-size:14px;}#mobile-menu-btn{display:flex;}}",
+      // Case pages get the same mobile header as home: icon on the left, CTA stretched.
+      // The arrow replaces the burger; the desktop '← Back' text link steps aside.
+      // !important because each case page ships its own !important CTA sizing.
+      "@media(max-width:768px){" +
+        "#site-header.is-back .hdr-back-wrap{display:none !important;}" +
+        "#site-header.is-back .hdr-side:last-child{width:100% !important;gap:24px !important;flex-direction:row-reverse !important;}" +
+        "#site-header.is-back .cta-pill{flex:1 !important;height:56px !important;padding:0 16px !important;font-size:16px !important;}" +
+        "#site-header.is-back .hdr-back-icon{display:flex !important;}" +
+      "}"
     ].join('');
     document.head.appendChild(style);
   }
 
   var CTA = '<a class="cta-pill" href="https://tally.so/r/VLQD1l" target="_blank">Work with me</a>';
 
+  var BACK_ICON = '<a class="hdr-back-icon" href="index.html" aria-label="Back">' +
+    '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+    '<path d="M23 11.9951H2"/><path d="M12.5 22.5 2 12 12.5 1.5"/></svg></a>';
+
   var left, extra = '';
   if (state === 'back') {
-    left = '<div class="hdr-side"><a class="hdr-back" href="index.html">← Back</a></div>';
+    left = '<div class="hdr-side hdr-back-wrap"><a class="hdr-back" href="index.html">← Back</a></div>';
   } else {
     left = '<div class="hdr-side hdr-nav">' +
            '<a href="index.html#selected-work">Work</a>' +
@@ -43,7 +58,10 @@
   }
 
   var rightInner = CTA;
-  if (state !== 'back') {
+  if (state === 'back') {
+    // Sits where the burger sits on home — row-reverse floats it to the left edge.
+    rightInner += BACK_ICON;
+  } else {
     rightInner += '<button id="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">' +
                   '<span class="burger-line"></span><span class="burger-line"></span><span class="burger-line"></span></button>';
     extra = '<div id="mobile-menu" aria-hidden="true">' +
@@ -52,7 +70,7 @@
             '<a href="https://www.instagram.com/kathsenin/" target="_blank">Instagram</a></div>';
   }
 
-  var html = '<header id="site-header">' + left +
+  var html = '<header id="site-header"' + (state === 'back' ? ' class="is-back"' : '') + '>' + left +
              '<div class="hdr-side">' + rightInner + '</div></header>' + extra;
 
   document.body.insertAdjacentHTML('afterbegin', html);
