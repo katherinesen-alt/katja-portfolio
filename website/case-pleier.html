@@ -32,6 +32,8 @@
       width: 100%;
       margin-top: 48px;
     }
+    /* Half-column media, minus 10% — one cell of the 2-up grid (16px gap) scaled down */
+    .case-img-half { max-width: calc((50% - 8px) * 0.9); }
     .case-img img {
       width: 100%;
       display: block;
@@ -57,11 +59,20 @@
       line-height: 1.4;
       color: #ffffff;
       margin-top: 48px;
-      max-width: 860px;
+      max-width: 720px;
     }
 
     .case-section { margin-top: 48px; }
     .case-statement + .case-section { margin-top: 24px; }
+    .case-section-heading {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      color: #ffffff;
+      margin-bottom: 24px;
+      max-width: 720px;
+    }
     .case-section-body {
       font-size: 16px;
       font-weight: 300;
@@ -69,6 +80,7 @@
       color: #aaa;
       max-width: 720px;
     }
+    .case-section-body + .case-section-body { margin-top: 20px; }
 
     .case-footer { padding: 40px 48px; text-align: center; }
     .case-footer p { font-size: 13px; font-weight: 300; color: #555; }
@@ -82,8 +94,10 @@
       .case-meta-value { font-size: 13px; }
       .case-statement { font-size: 20px; line-height: 1.4; margin-top: 40px; }
       .case-section { margin-top: 40px; }
+      .case-section-heading { font-size: 22px; margin-bottom: 20px; }
       .case-section-body { font-size: 16px; line-height: 1.6; }
       .case-img { margin-top: 32px; }
+      .case-img-half { max-width: 100%; }
       .case > div[style*="grid-template-columns"] {
         grid-template-columns: 1fr !important;
         gap: 16px !important;
@@ -128,42 +142,74 @@
           <span class="case-meta-label">Role</span>
           <span class="case-meta-value">Product Designer</span>
         </div>
+        <div class="case-meta-item">
+          <span class="case-meta-label">Platform</span>
+          <span class="case-meta-value">iOS &amp; Android</span>
+        </div>
       </div>
     </div>
 
     <div class="case-img">
-      <img src="case studies/pleier/pleier1.jpg" alt="PLEIER hero">
+      <img src="case studies/pleier/pleier1.jpg" alt="PLEIER app shown on three phones: podcast categories, saved episodes and search">
     </div>
 
-    <p class="case-statement">Postimees Group brings together dozens of radio stations, podcasts, and media projects.</p>
+    <p class="case-statement">Postimees Group runs dozens of radio stations, podcasts and media projects. All of it lived in different places, on different platforms, under different rules. Pleier was built to be the single entry point: live broadcasts, show archives and podcasts from the whole group in one app.</p>
 
     <div class="case-section">
-      <p class="case-section-body">The content was scattered across different platforms and apps. PLEIER became the single entry point: live broadcasts, show archives, and podcasts from the entire group in one place.</p>
-    </div>
-
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:48px;">
-      <img src="case studies/pleier/pleier2.jpg" alt="PLEIER" style="width:100%; display:block; border-radius:0;">
-      <img src="case studies/pleier/pleier3.jpg" alt="PLEIER" style="width:100%; display:block; border-radius:0;">
+      <p class="case-section-body">Full product design from scratch, in collaboration with a product manager. User flows, wireframes, light and dark interface, and a design system underneath it.</p>
     </div>
 
     <div class="case-section">
-      <p class="case-section-body">Full product design from scratch in collaboration with a product manager. The work included user flow research, wireframes, final interface in light and dark mode, and a design system that keeps everything consistent across the product and makes future development easier.</p>
-    </div>
-
-    <div class="case-section">
-      <p class="case-section-body">The app needed to work equally well for two very different use cases. Passive background listening to live radio, and active search for a specific podcast or episode.</p>
+      <h3 class="case-section-heading">Structure first</h3>
+      <p class="case-section-body">The app was mapped as a system with the product manager before any interface work: every screen defined by what it holds, every route agreed, every state named while it was still cheap to argue about.</p>
+      <p class="case-section-body">Questions that usually surface halfway through design were settled on the map instead.</p>
     </div>
 
     <div class="case-img">
-      <img src="case studies/pleier/pleier4.jpg" alt="PLEIER">
-    </div>
-
-    <div class="case-img">
-      <img src="case studies/pleier/pleier5.jpg" alt="PLEIER">
+      <img src="case studies/pleier/arhitecture.png" alt="Architecture map of the app: every screen defined by what it holds, with the routes between them">
     </div>
 
     <div class="case-section">
-      <p class="case-section-body">The app launched and is available to users.</p>
+      <h3 class="case-section-heading">Borrowing on purpose</h3>
+      <p class="case-section-body">Dozens of radio and podcast apps were pulled apart before anything was designed. The conclusion was to invent as little as possible.</p>
+      <p class="case-section-body">Nothing about a listening app should need learning. People arrive with habits formed by Spotify and Audible, and those habits are worth more than originality. So the podcast side deliberately follows the patterns people already carry: browse, subscribe, add to favourites, resume. Familiar was the goal, not a compromise.</p>
+    </div>
+
+    <div class="case-img">
+      <img src="case studies/pleier/pleier6.jpg" alt="Screens collected from existing radio and podcast apps during the teardown, including Spotify and BBC Sounds">
+    </div>
+
+    <div class="case-section">
+      <h3 class="case-section-heading">Radio doesn't behave like a podcast</h3>
+      <p class="case-section-body">A podcast is something you go looking for. It sits in an archive and waits. Radio is the opposite. It's happening now, it isn't there later, and the only question a listener has is what's on.</p>
+      <p class="case-section-body">So it was built as stories, an idea that came from the product manager and held up through the rest of the work. The format already carries the meaning: fresh, current, gone soon, scannable in a few seconds without commitment. Stations sit in a ring at the top of the home screen under a live marker. Scrolling through them brings each station forward in turn, and the one in focus shows what's airing on it right now.</p>
+      <p class="case-section-body">The stories format arrives with a progress ring already attached, so it was given something real to report. A listener gets the station, the show and how long they have to catch it before making any decision at all.</p>
+      <p class="case-section-body">Deciding what to listen to takes a swipe, not a screen.</p>
+    </div>
+
+    <div class="case-img case-img-half">
+      <video src="case studies/pleier/pleier-video.mp4" autoplay loop muted playsinline style="width:100%; display:block; border-radius:0;"></video>
+    </div>
+
+    <div class="case-section">
+      <h3 class="case-section-heading">The kit underneath</h3>
+      <p class="case-section-body">An app that pulls in content from across a whole media group has one structural problem: nothing arrives looking the same. Dozens of stations and shows, each with its own artwork, its own colours, its own logo lockup. The interface had to hold all of it without turning into a collage.</p>
+      <p class="case-section-body">So the system was built to stay quiet. Neutral surfaces, one type scale, a small set of components carrying the content rather than competing with it. Light and dark run through the same components instead of two parallel sets, and the covers do the visual work, which is what a listener is actually scanning for.</p>
+      <p class="case-section-body">One design served both platforms. Everything else was built once and reused.</p>
+    </div>
+
+    <div class="case-img">
+      <img src="case studies/pleier/pleier4.jpg" alt="PLEIER interface components shown in light and dark mode">
+    </div>
+
+    <div class="case-section">
+      <h3 class="case-section-heading">Shipping</h3>
+      <p class="case-section-body">The launch window was short and the app went live without a formal testing round. The familiarity strategy was partly a response to that. When there is no time to test, the safest interface is one built almost entirely from patterns that have already been tested by everyone else.</p>
+      <p class="case-section-body">Pleier launched on both platforms and is still in the stores. A few visual details have shifted since, but the structure the app launched with is the one it still runs on.</p>
+    </div>
+
+    <div class="case-img">
+      <img src="case studies/pleier/pleier5.jpg" alt="The player screen shown in light and dark mode">
     </div>
 
   </div>
