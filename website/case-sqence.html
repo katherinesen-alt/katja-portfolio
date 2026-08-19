@@ -50,12 +50,72 @@
 
     .case-section { margin-top: 64px; }
     .case-statement + .case-section { margin-top: 24px; }
+    .case-section-heading {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      color: #040002;
+      margin-bottom: 24px;
+      max-width: 720px;
+    }
     .case-section-body {
       font-size: 16px;
       font-weight: 300;
       line-height: 1.65;
       color: #444;
       max-width: 720px;
+    }
+    .case-section-body + .case-section-body { margin-top: 20px; }
+
+    .case-list { list-style: none; max-width: 720px; margin-top: 20px; }
+    .case-list li {
+      position: relative;
+      padding-left: 22px;
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: #444;
+    }
+    .case-list li + li { margin-top: 8px; }
+    .case-list li::before {
+      content: "\2013";
+      position: absolute;
+      left: 0;
+      color: #999;
+    }
+    .case-list + .case-section-body { margin-top: 20px; }
+
+    .case-img-placeholder {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #f4f4f4;
+      border-radius: 20px;
+      margin-top: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+    }
+    .case-img-placeholder span { font-size: 14px; font-weight: 400; color: #999; }
+
+    .case-caption {
+      margin-top: 12px;
+      max-width: 720px;
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.5;
+      color: #999;
+    }
+
+    .case-note {
+      margin-top: 64px;
+      max-width: 720px;
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: #999;
     }
 
     .case-footer { padding: 40px 48px; text-align: center; }
@@ -70,6 +130,7 @@
       .case-meta-value { font-size: 13px; }
       .case-statement { font-size: 20px; line-height: 1.4; margin-top: 40px; }
       .case-section { margin-top: 40px; }
+      .case-section-heading { font-size: 22px; margin-bottom: 20px; }
       .case-section-body { font-size: 16px; line-height: 1.6; }
       .case-img { margin-top: 32px; }
       .case > div[style*="grid-template-columns"] {
@@ -98,7 +159,7 @@
 
     <!-- Hero -->
     <div class="case-header">
-      <h1 class="case-hero-text">SQENCE, most mysterious social media.</h1>
+      <h1 class="case-hero-text">SQENCE. A real-time social network built on one rule: post first, see after.</h1>
       <div class="case-meta-row">
         <div class="case-meta-item">
           <span class="case-meta-label">Type</span>
@@ -106,7 +167,7 @@
         </div>
         <div class="case-meta-item">
           <span class="case-meta-label">Role</span>
-          <span class="case-meta-value">Product Design</span>
+          <span class="case-meta-value">Product Design (freelance, embedded in the founding team)</span>
         </div>
         <div class="case-meta-item">
           <span class="case-meta-label">Credits</span>
@@ -115,50 +176,118 @@
       </div>
     </div>
 
-    <!-- Hero image -->
     <div class="case-img">
-      <img src="case studies/sqence/image1.jpg" alt="SQENCE hero">
+      <img src="case studies/sqence/image1.jpg" alt="Sqence key visual: the app on a phone against a purple field">
     </div>
 
-    <!-- Problem statement -->
-    <p class="case-statement">Product design for a social network built around real moments and real people.</p>
+    <p class="case-statement">Sqence was built against the logic of most social apps. No filters, no gallery uploads, no editing. A photo had to be taken now, in the moment, or not at all.</p>
 
     <div class="case-section">
-      <p class="case-section-body">Most social apps optimize for performance: curated photos, filters, idealized versions of life. SQENCE was built on the opposite premise: no uploads, no filters, only content captured in real time.</p>
+      <p class="case-section-body">The core mechanic was a sequence. Someone starts it with a photo and a short prompt, "Show me your weather," "Capture pure joy," and sends it on. Whoever receives it has one hour to capture their own photo before they can see it, and that same prompt carries forward to everyone who joins the sequence after them. Everyone else's photos stay blurred until you contribute your own. BeReal was the closest thing on the market, but the sequence structure, one prompt tying a chain of photos together, was Sqence's own.</p>
+      <p class="case-section-body">Photos could be liked, commented on, and saved to favorites, the same as any social app. What made Sqence different was what stood in front of that: nothing was visible until you had already participated.</p>
     </div>
 
-    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-top:32px;">
-      <img src="case studies/sqence/image4-1.jpg" alt="SQENCE flows" style="width:100%; display:block; border-radius: 20px;">
-      <img src="case studies/sqence/image4-2.png" alt="SQENCE flows" style="width:100%; display:block; border-radius: 20px;">
-      <img src="case studies/sqence/image4-3.jpg" alt="SQENCE flows" style="width:100%; display:block; border-radius: 20px;">
+    <div class="case-img">
+      <img src="case studies/sqence/the-idea.png" alt="How a sequence works: a prompt passed on, each photo blurred until you add your own">
     </div>
 
     <div class="case-section">
-      <p class="case-section-body">The challenge was making a restrictive concept feel inviting rather than limiting, and building a social experience that still feels fun without the tools users are used to. A flawless balance between functionality and clean, simple design.</p>
+      <h3 class="case-section-heading">The starting point</h3>
+      <p class="case-section-body">The concept came from the founder, but it lived mostly in his head. There was a raw flow, minimal, just enough to explain the app's logic, but no real spec and no defined edge cases. The build timeline was short, and there was no room for a conventional research phase.</p>
+      <p class="case-section-body">Most of the early work was not inventing new ideas. It was asking the questions that turned a founder's mental model into something buildable: what happens if a friend doesn't respond in time, what a profile shows before you've posted anything, what disappears and when. The founder held the vision. The job was to walk through it with him until nothing was left assumed.</p>
+    </div>
+
+    <div class="case-section">
+      <h3 class="case-section-heading">What the capture flow could and couldn't do</h3>
+      <p class="case-section-body">The constraint was strict by design:</p>
+      <ul class="case-list">
+        <li>No access to camera roll</li>
+        <li>No editing, only recapture</li>
+        <li>One hour to respond from the moment a friend sends a prompt</li>
+        <li>Front and back camera, digital zoom, and video capture, nothing else</li>
+      </ul>
+      <p class="case-section-body">Every screen after that had to work within those limits. Camera, navigation, and profile were kept as close to native patterns as possible, so the only thing asking for the user's attention was the capture itself.</p>
+    </div>
+
+    <div class="case-section">
+      <h3 class="case-section-heading">How content was browsed</h3>
+      <p class="case-section-body">Content was browsed the way short-form video is: swipe up to move through the current sequence's stack, one photo at a time. Reaching the end of that stack moved you into the next sequence automatically. Swiping left worked as a shortcut past that, jumping straight to a different sequence. Either way, a small message, "You had moved to the next sequence," told the user the topic had changed. The browsing model borrowed from something people already knew, TikTok, Reels, but repurposed for a very different content structure.</p>
     </div>
 
     <div class="case-img">
-      <img src="case studies/sqence/image7.jpg" alt="SQENCE visual system">
+      <img src="case studies/sqence/content.png" alt="Browsing a sequence: swipe up through the stack, swipe left to jump to another sequence">
     </div>
 
-    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-top:32px;">
-      <img src="case studies/sqence/image2-1.png" alt="SQENCE concept" style="width:100%; display:block; border-radius: 20px;">
-      <img src="case studies/sqence/image2-2.jpg" alt="SQENCE concept" style="width:100%; display:block; border-radius: 20px;">
-      <img src="case studies/sqence/image2-3.png" alt="SQENCE concept" style="width:100%; display:block; border-radius: 20px;">
+    <div class="case-section">
+      <h3 class="case-section-heading">Ephemeral by default</h3>
+      <p class="case-section-body">Nothing in Sqence was meant to last. Sequences and their photos expired within a set window. Favorites was the one place content could be kept, and even there, removing something deleted it permanently.</p>
     </div>
 
-    <div class="case-img">
-      <img src="case studies/sqence/image5.jpg" alt="SQENCE interface">
-    </div>
-
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:32px;">
-      <img src="case studies/sqence/image3-1.jpg" alt="SQENCE screens" style="width:100%; display:block; border-radius: 20px;">
-      <img src="case studies/sqence/image3-2.jpg" alt="SQENCE screens" style="width:100%; display:block; border-radius: 20px;">
+    <div class="case-section">
+      <h3 class="case-section-heading">Onboarding: what didn't work</h3>
+      <p class="case-section-body">The first version walked a new user through creating their first sequence step by step. It was a full guided flow, mandatory, with no way to skip. Testing showed it backfired. People found it too long, and being unable to skip it made things worse, not better. It was dropped entirely and replaced with two lightweight cues: a swipe hint lasting a second or two, and the mascot pointing at the post button. Neither gets in anyone's way. That worked.</p>
     </div>
 
     <div class="case-img">
-      <img src="case studies/sqence/image6.jpg" alt="SQENCE details">
+      <img src="case studies/sqence/old-tutorial.png" alt="The original mandatory onboarding: a step-by-step walkthrough of creating a first sequence">
+      <p class="case-caption">The first version: a mandatory step-by-step walkthrough, with no way to skip</p>
     </div>
+
+    <div class="case-img">
+      <img src="case studies/sqence/new-tutorial.jpg" alt="The replacement: a brief swipe hint and the mascot pointing at the post button">
+      <p class="case-caption">What replaced it: a swipe hint lasting a second or two, and the mascot</p>
+    </div>
+
+    <div class="case-section">
+      <h3 class="case-section-heading">The mascot</h3>
+      <p class="case-section-body">Introducing a mascot into the product was my decision, designed and illustrated by Andreas Vinkel. It lived in the app as a consistent character: guiding on empty screens, illustrating information on stat popups, always the same soft, permanent presence in an app built around disappearing content.</p>
+    </div>
+
+    <div class="case-img">
+      <img src="case studies/sqence/image7.jpg" alt="The Sqence mascot as it appears in the app">
+    </div>
+
+    <div class="case-section">
+      <h3 class="case-section-heading">Circles: the pivot</h3>
+      <p class="case-section-body">Sequences alone didn't hold. Testing in the office, against the target persona, then opened to a small external group, surfaced two consistent pieces of feedback: there weren't enough people in a sequence to make it interesting, and once the novelty wore off, it got boring. What people kept asking for was something to keep coming back to, a group built around a shared interest or topic. That gap is what circles were built to close.</p>
+      <p class="case-section-body">Circles came out of a working session between the founder, the PM, and me. The founder brought the idea of shared-interest groups, the PM added the concept of a task an admin could set, and from there it became a design problem: how do people join, and how does a circle behave differently depending on how open it is.</p>
+      <p class="case-section-body">The result was three circle types. Private, one-to-one with a single friend, behaving like a regular sequence. Group, public and joinable, where an admin could set a prompt (the reading club example: "What are you reading today?") that turned into a shared gallery, everyone's photo laid out in a grid, with anyone who hadn't yet participated still shown blurred. Following, view-only, though still able to like, comment, and save to favorites.</p>
+      <p class="case-section-body">A leaderboard number attached to each circle's top contributor was part of the founder's original brief and carried through into the final build.</p>
+    </div>
+
+    <div class="case-img">
+      <img src="case studies/sqence/circles.png" alt="The three circle types: private, group with an admin-set prompt, and following">
+    </div>
+
+    <div class="case-section">
+      <h3 class="case-section-heading">What was actually built</h3>
+      <ul class="case-list">
+        <li>Full capture flow: sequence-based posting, one-hour response window, front and back camera, zoom, and video capture</li>
+        <li>Social layer: likes, comments, favorites, and sharing</li>
+        <li>Friend system: add, remove, block, and invite to the app</li>
+        <li>Circles: private, group, and following, with admin-set prompts</li>
+        <li>Full profile system, including first-login empty state</li>
+        <li>Notifications, covering comments, likes, friend requests, and moderation notices</li>
+      </ul>
+      <p class="case-section-body">This shipped as a complete app on both iOS and Android. Marketing materials and a live landing page followed.</p>
+    </div>
+
+    <div class="case-img">
+      <img src="case studies/sqence/sqence-platforms.png" alt="The same Sqence screens on iOS and Android, each following its platform's native conventions">
+      <p class="case-caption">iOS and Android, adapted to each platform's native conventions</p>
+    </div>
+
+    <div class="case-img">
+      <img src="case studies/sqence/image5.jpg" alt="A collection of Sqence screens: sign-in, circles, task creation, explore and the feed">
+    </div>
+
+    <div class="case-section">
+      <h3 class="case-section-heading">Where it is now</h3>
+      <p class="case-section-body">Sqence ran in the App Store and Google Play for several months before being discontinued and pulled from both stores.</p>
+      <p class="case-section-body">The clearest lesson from this project is about timing. Getting real users onto the product earlier, even without a formal research phase, would have surfaced the boredom problem sooner and left more room to design for it before launch instead of after.</p>
+    </div>
+
+    <p class="case-note">This case describes design decisions and product structure only. Business, financial, and internal process details are withheld per the terms of the project's confidentiality agreement.</p>
 
   </div>
 
