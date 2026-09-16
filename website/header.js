@@ -25,6 +25,8 @@
       "#mobile-menu.open{opacity:1;visibility:visible;pointer-events:auto;}",
       "#mobile-menu a{font-family:'Onest',system-ui,sans-serif;font-size:32px;font-weight:500;color:#040002;text-decoration:none;padding:16px 0;letter-spacing:-.01em;transition:color 200ms ease;}",
       "#mobile-menu a:hover{color:#1E35FF;}",
+      "#site-header .hdr-email,#mobile-menu .hdr-email{display:inline-flex;align-items:center;gap:.28em;}",
+      "#site-header .hdr-email svg,#mobile-menu .hdr-email svg{width:.78em;height:.78em;flex-shrink:0;}",
       "#site-header .hdr-back-icon{display:none;width:40px;height:40px;flex-shrink:0;align-items:center;justify-content:center;color:#040002;}",
       "#site-header .hdr-back-icon:hover{color:#1E35FF;}",
       "@media(max-width:768px){#site-header{padding:14px 16px;z-index:70;}#site-header .hdr-nav{display:none;}#site-header .cta-pill{height:40px;padding:0 20px;font-size:14px;}#mobile-menu-btn{display:flex;}}",
@@ -32,16 +34,28 @@
       // The arrow replaces the burger; the desktop '← Back' text link steps aside.
       // !important because each case page ships its own !important CTA sizing.
       "@media(max-width:768px){" +
-        "#site-header.is-back .hdr-back-wrap{display:none !important;}" +
-        "#site-header.is-back .hdr-side:last-child{width:100% !important;gap:24px !important;flex-direction:row-reverse !important;}" +
-        "#site-header.is-back .cta-pill{flex:1 !important;height:56px !important;padding:0 16px !important;font-size:16px !important;}" +
-        "#site-header.is-back .hdr-back-icon{display:flex !important;}" +
+        "#site-header.is-back.has-cta .hdr-back-wrap{display:none !important;}" +
+        "#site-header.is-back.has-cta .hdr-side:last-child{width:100% !important;gap:24px !important;flex-direction:row-reverse !important;}" +
+        "#site-header.is-back.has-cta .cta-pill{flex:1 !important;height:56px !important;padding:0 16px !important;font-size:16px !important;}" +
+        "#site-header.is-back.has-cta .hdr-back-icon{display:flex !important;}" +
       "}"
     ].join('');
     document.head.appendChild(style);
   }
 
+  // "Work with me" CTA - removed from the header on 2026-09-10.
+  // To bring it back: set SHOW_CTA to true. Nothing else needs changing;
+  // the pill returns to the top right of the home page and every case page.
+  // Form behind it: https://tally.so/r/VLQD1l
+  var SHOW_CTA = false;
   var CTA = '<a class="cta-pill" href="https://tally.so/r/VLQD1l" target="_blank">Work with me</a>';
+
+  // Opens the visitor's own mail app with the address already filled in.
+  var EMAIL = 'katherine.senina@gmail.com';
+  var EMAIL_LINK = '<a class="hdr-email" href="mailto:' + EMAIL + '">Email' +
+    '<svg viewBox="0 0 12 12" fill="none" aria-hidden="true">' +
+    '<path d="M3.2 8.8 8.8 3.2M4.4 3.2H8.8V7.6" stroke="currentColor" stroke-width="1.5"' +
+    ' stroke-linecap="round" stroke-linejoin="round"/></svg></a>';
 
   var BACK_ICON = '<a class="hdr-back-icon" href="index.html" aria-label="Back">' +
     '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
@@ -54,23 +68,27 @@
     left = '<div class="hdr-side hdr-nav">' +
            '<a href="index.html#selected-work">Work</a>' +
            '<a href="https://www.linkedin.com/in/jekaterina-senina/" target="_blank">LinkedIn</a>' +
-           '<a href="https://www.instagram.com/kathsenin/" target="_blank">Instagram</a></div>';
+           '<a href="https://www.instagram.com/kathsenin/" target="_blank">Instagram</a>' +
+           EMAIL_LINK + '</div>';
   }
 
-  var rightInner = CTA;
+  var rightInner = SHOW_CTA ? CTA : '';
   if (state === 'back') {
+    rightInner += EMAIL_LINK;
     // Sits where the burger sits on home — row-reverse floats it to the left edge.
-    rightInner += BACK_ICON;
+    if (SHOW_CTA) rightInner += BACK_ICON;
   } else {
     rightInner += '<button id="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">' +
                   '<span class="burger-line"></span><span class="burger-line"></span><span class="burger-line"></span></button>';
     extra = '<div id="mobile-menu" aria-hidden="true">' +
             '<a href="index.html#selected-work">Work</a>' +
             '<a href="https://www.linkedin.com/in/jekaterina-senina/" target="_blank">LinkedIn</a>' +
-            '<a href="https://www.instagram.com/kathsenin/" target="_blank">Instagram</a></div>';
+            '<a href="https://www.instagram.com/kathsenin/" target="_blank">Instagram</a>' +
+            EMAIL_LINK + '</div>';
   }
 
-  var html = '<header id="site-header"' + (state === 'back' ? ' class="is-back"' : '') + '>' + left +
+  var headerClass = (state === 'back' ? 'is-back' : '') + (SHOW_CTA ? ' has-cta' : '');
+  var html = '<header id="site-header"' + (headerClass.trim() ? ' class="' + headerClass.trim() + '"' : '') + '>' + left +
              '<div class="hdr-side">' + rightInner + '</div></header>' + extra;
 
   document.body.insertAdjacentHTML('afterbegin', html);

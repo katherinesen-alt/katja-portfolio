@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spaceit MCS Design System – Katja</title>
+  <title>Spaceit MCS Design System: Building one system for an evolving mission-control product</title>
   <link rel="stylesheet" href="fonts.css">
 
   <style>
@@ -55,6 +55,7 @@
     .case-meta-value {
       font-size: 13px;
       font-weight: 400;
+      line-height: 1.6;
       color: #040002;
     }
 
@@ -118,6 +119,31 @@
       box-decoration-break: clone;
       -webkit-box-decoration-break: clone;
     }
+    .case-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 32px 24px;
+      max-width: 900px;
+      margin-top: 56px;
+    }
+    .case-stat-value {
+      display: block;
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(38px, 4vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: #1E35FF;
+    }
+    .case-stat-label {
+      display: block;
+      margin-top: 12px;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.4;
+      color: #444;
+    }
+
     .case-quote {
       font-size: 16px;
       font-weight: 400;
@@ -135,6 +161,8 @@
     .case-section .case-img + .case-section-body { margin-top: 32px; }
     .case-section > div[style*="margin-top"] { margin-top: 32px !important; }
     .case-section > div[style*="margin-top"] + .case-section-body { margin-top: 32px; }
+    .case-section > img + .case-section-body,
+    .case-section > video + .case-section-body { margin-top: 32px; }
     .case-closing { margin-top: 64px; }
 
     /* Footer */
@@ -164,10 +192,13 @@
       .case-quote + .case-quote { margin-top: 20px; }
       .case-quote + .case-section-body { margin-top: 20px; }
       .case-img { margin-top: 40px; }
+      .case-stats { grid-template-columns: 1fr 1fr; gap: 28px 20px; margin-top: 40px; }
       .case-section .case-img { margin-top: 24px; }
       .case-section .case-img + .case-section-body { margin-top: 24px; }
       .case-section > div[style*="margin-top"] { margin-top: 24px !important; }
       .case-section > div[style*="margin-top"] + .case-section-body { margin-top: 24px; }
+      .case-section > img + .case-section-body,
+      .case-section > video + .case-section-body { margin-top: 24px; }
       .case-closing { margin-top: 40px; }
 
       #site-header { padding: 14px 20px !important; }
@@ -192,7 +223,7 @@
 
     <!-- Hero -->
     <div class="case-header">
-      <h1 class="case-hero-text">Spaceit MCS Design System.</h1>
+      <h1 class="case-hero-text">Spaceit MCS Design System: Building one system for an evolving mission-control product</h1>
       <div class="case-meta-row">
         <div class="case-meta-item">
           <span class="case-meta-label">Type</span>
@@ -203,6 +234,10 @@
           <span class="case-meta-value">Sole Product Designer</span>
         </div>
         <div class="case-meta-item">
+          <span class="case-meta-label">Scope</span>
+          <span class="case-meta-value">Design System, Component Architecture, Documentation, Web &amp; Mobile</span>
+        </div>
+        <div class="case-meta-item">
           <span class="case-meta-label">Duration</span>
           <span class="case-meta-value">3 years, built in parallel with the product</span>
         </div>
@@ -211,6 +246,12 @@
 
     <!-- Hero image placeholder -->
     <div class="case-img" style="background:none;"><img src="case studies/ds/hero.png?v=2" alt="MCS Design System" style="width:100%; height:100%; object-fit:cover; border-radius:0;"></div>
+
+    <div class="case-stats">
+      <div><span class="case-stat-value">280+</span><span class="case-stat-label">components</span></div>
+      <div><span class="case-stat-value">25+</span><span class="case-stat-label">product workflows supported</span></div>
+      <div><span class="case-stat-value">3 years</span><span class="case-stat-label">evolving alongside the product</span></div>
+    </div>
 
     <!-- Lead -->
     <p class="case-statement">Why a system, and why from day one.</p>
@@ -224,8 +265,8 @@
     <!-- How it's built -->
     <div class="case-section">
       <h3 class="case-section-heading">How it's built</h3>
-      <p class="case-section-body">Atomic design, 8pt grid, all theming through component variants. Figma variables didn't yet support color or typography when the system started, so everything ran through styles. Themes (light and dark, on both desktop and mobile) lived inside component variants, not parallel files. One component, one source of truth, four faces.</p>
-      <p class="case-section-body">The library is organised by category, not by module. Basics (colors, typography, icons), then the building blocks (avatars, buttons, labels, alerts, controls, inputs, dropdowns, date/time pickers, calendars, tables, data, modals, widgets, sidebar menu) for desktop. A parallel structure for mobile, with the patterns mobile actually needs: navigation bar, action bar, bottom sheets, rows. Components carry annotations and usage notes inside the file. The front-end developer worked from the same library, in parallel, and the production product maps to the Figma source one to one.</p>
+      <p class="case-section-body">Atomic design, 8pt grid, all theming through component variants and styles. Themes (light and dark, on both desktop and mobile) lived inside component variants, not parallel files. Wherever the interaction allowed it, one component served as the source of truth across all four versions.</p>
+      <p class="case-section-body">The library is organised by category, not by module. Basics (colors, typography, icons), then the building blocks (avatars, buttons, labels, alerts, controls, inputs, dropdowns, date/time pickers, calendars, tables, data, modals, widgets, sidebar menu). Most components were shared across desktop and mobile. Separate mobile components were created only where platform-specific behaviour or interaction patterns required a different solution, such as navigation bars, action bars, bottom sheets, and mobile-specific rows. Components carry annotations and usage notes inside the file.</p>
     </div>
 
     <!-- Widgets -->

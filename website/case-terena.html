@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terena. Turning a traditional specialist clinic into a digital service</title>
+  <link rel="stylesheet" href="fonts.css">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+    body { font-family: 'Onest', system-ui, sans-serif; background: #ffffff; color: #040002; }
+
+    .case { max-width: 1080px; margin: 0 auto; padding: 0 48px 80px; }
+
+    /* Header */
+    .case-header { padding-top: 136px; padding-bottom: 0; }
+    .case-hero-text {
+      font-size: clamp(32px, 4.5vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      color: #040002;
+      max-width: 900px;
+    }
+
+    /* Meta rows */
+    .case-meta-row { display: flex; flex-direction: column; gap: 0; margin-top: 32px; }
+    .case-meta-item { display: flex; align-items: baseline; gap: 16px; padding: 10px 0; }
+    .case-meta-label { font-size: 13px; font-weight: 400; color: #999; width: 140px; flex-shrink: 0; }
+    .case-meta-value { font-size: 13px; font-weight: 400; line-height: 1.6; color: #040002; }
+    .case-meta-value a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid #ccc;
+      transition: color 200ms ease, border-color 200ms ease;
+    }
+    .case-meta-value a:hover { color: #1E35FF; border-color: #1E35FF; }
+
+    /* Media */
+    .case-img { width: 100%; margin-top: 64px; }
+    .case-img img { width: 100%; display: block; border-radius: 0; }
+    .case-img-half { max-width: calc((50% - 8px) * 0.9); }
+    .case-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      max-width: 900px;
+      margin-top: 64px;
+    }
+    .case-section .case-compare { margin-top: 32px; }
+    .case-compare-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #040002;
+    }
+    .case-compare-subtitle {
+      font-size: 14px;
+      font-weight: 400;
+      color: #999;
+      margin-top: 2px;
+      margin-bottom: 20px;
+    }
+    .case-compare-list { list-style: none; }
+    .case-compare-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #040002;
+    }
+    .case-compare-list li + li { margin-top: 16px; }
+    .case-section .case-img { margin-top: 32px; }
+
+    .case-img-placeholder {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #f0f0f0;
+      border-radius: 0;
+      margin-top: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .case-section .case-img-placeholder { margin-top: 32px; }
+    .case-img-placeholder span { font-size: 14px; font-weight: 400; color: #bbb; }
+
+    /* Lead */
+    .case-statement {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      color: #040002;
+      margin-top: 64px;
+      max-width: 720px;
+    }
+
+    /* At a glance block: H2 + H3 hierarchy, matching the Spaceit MCS case */
+    .case-h2 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: #040002;
+      max-width: 720px;
+      margin-bottom: 20px;
+    }
+    .case-h3 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      line-height: 1.3;
+      color: #040002;
+      max-width: 720px;
+      margin-bottom: 10px;
+    }
+    .case-h3 + .case-section-body,
+    .case-h3 + .case-list,
+    .case-h3 + .case-statement { margin-top: 10px; }
+    .case-h2 + .case-statement { margin-top: 0; }
+
+    /* Solution subsections: H3-to-body gap matches ordinary paragraph spacing */
+    .case-solution-item .case-h3 + .case-section-body { margin-top: 24px; }
+
+    /* Sections */
+    .case-section { margin-top: 64px; }
+    .case-statement + .case-section { margin-top: 24px; }
+    .case-glance-item { margin-top: 32px; }
+    .case-statement + .case-section-body { margin-top: 20px; }
+    .case-section-heading {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      color: #040002;
+      margin-top: 48px;
+      margin-bottom: 24px;
+      max-width: 720px;
+    }
+    .case-section-heading:first-child { margin-top: 0; }
+    .case-section-body {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: #444;
+      max-width: 720px;
+    }
+    .case-section-body + .case-section-body { margin-top: 24px; }
+
+    .case-quote {
+      font-size: 16px;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.6;
+      color: #444;
+      border-left: 2px solid #1E35FF;
+      padding-left: 20px;
+      margin-top: 24px;
+      max-width: 720px;
+    }
+    .case-quote + .case-section-body { margin-top: 24px; }
+
+    .case-list { list-style: none; max-width: 720px; margin-top: 20px; }
+    .case-list li {
+      position: relative;
+      padding-left: 22px;
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: #444;
+    }
+    .case-list li + li { margin-top: 8px; }
+    .case-list li::before { content: "\2022"; position: absolute; left: 0; color: #999; }
+    .case-list-plain li { padding-left: 0; }
+    .case-list-plain li::before { content: none; }
+    #every-page-line + .case-list-plain { margin-top: 10px; }
+    .case-section-body strong, .case-list li strong { font-weight: 600; color: #040002; }
+    .case-list + .case-section-body { margin-top: 24px; }
+
+    .case-list-numbered { counter-reset: stage; }
+    .case-list-numbered li { padding-left: 24px; }
+    .case-list-numbered li::before {
+      content: counter(stage) ".";
+      counter-increment: stage;
+      color: #999;
+    }
+
+    /* Footer */
+    .case-footer { padding: 40px 48px; text-align: center; }
+    .case-footer p { font-size: 13px; font-weight: 300; color: #999; }
+
+    /* ── Mobile ────────────────────────────────── */
+    @media (max-width: 768px) {
+      .case { padding: 0 20px 60px; }
+      .case-header { padding-top: 124px; padding-bottom: 0; }
+      .case-meta-item { gap: 12px; padding: 8px 0; }
+      .case-meta-label { width: 88px; font-size: 13px; }
+      .case-meta-value { font-size: 13px; }
+      .case-statement { font-size: 22px; line-height: 1.25; margin-top: 40px; }
+      .case-section { margin-top: 40px; }
+      .case-glance-item { margin-top: 20px; }
+      .case-section-heading { font-size: 22px; margin-top: 32px; margin-bottom: 20px; }
+      .case-section-body { font-size: 16px; line-height: 1.6; }
+      .case-section-body + .case-section-body { margin-top: 20px; }
+      .case-solution-item .case-h3 + .case-section-body { margin-top: 20px; }
+      .case-quote { font-size: 16px; padding-left: 16px; margin-top: 20px; }
+      .case-quote + .case-section-body { margin-top: 20px; }
+      .case-img, .case-img-placeholder { margin-top: 40px; }
+      .case-section .case-img, .case-section .case-img-placeholder { margin-top: 24px; }
+      .case-img-half { max-width: 100%; }
+      .case-compare { grid-template-columns: 1fr; gap: 32px; margin-top: 40px; }
+      .case-section .case-compare { margin-top: 24px; }
+
+      #site-header { padding: 14px 20px !important; }
+      #site-header a { font-size: 14px !important; }
+      #site-header a[href*="tally.so"] {
+        height: 40px !important;
+        padding: 0 18px !important;
+        font-size: 14px !important;
+      }
+      .case-footer { padding: 32px 20px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ─── Header ──────────────────────────────────────────────────── -->
+  <!-- header injected by header.js (state=back) -->
+
+  <!-- ─── Case Study ──────────────────────────────────────────────── -->
+  <div class="case">
+
+    <!-- Hero -->
+    <div class="case-header">
+      <h1 class="case-hero-text">Terena. Turning a traditional specialist clinic into a digital service</h1>
+      <div class="case-meta-row">
+        <div class="case-meta-item">
+          <span class="case-meta-label">Type</span>
+          <span class="case-meta-value">Healthcare, Web Product, Design Systems</span>
+        </div>
+        <div class="case-meta-item">
+          <span class="case-meta-label">Role</span>
+          <span class="case-meta-value">Product Designer</span>
+        </div>
+        <div class="case-meta-item">
+          <span class="case-meta-label">Scope</span>
+          <span class="case-meta-value">Product Design from Research Findings to Launch, Service Structure, Prototyping, Accessibility, Design System, Brand Design</span>
+        </div>
+        <div class="case-meta-item">
+          <span class="case-meta-label">Team</span>
+          <span class="case-meta-value"><a href="https://www.linkedin.com/in/eveli-randlane/" target="_blank" rel="noopener">Eveli Randlane</a> (research, analytics, project management)<br><a href="https://www.linkedin.com/in/laura-kullerkupp/" target="_blank" rel="noopener">Laura Kullerkupp</a> (research and analytics)<br><a href="https://www.linkedin.com/in/elina-vilja/" target="_blank" rel="noopener">Elina Vilja</a>, <a href="https://www.linkedin.com/in/anna-aron-733326250/" target="_blank" rel="noopener">Anna Aaron</a> (marketing and brand strategy)<br><a href="https://www.linkedin.com/in/mihhail-jaskov/" target="_blank" rel="noopener">Mihhail Jaskov</a>, <a href="https://www.linkedin.com/in/merilinsellik/" target="_blank" rel="noopener">Merilin Sellik</a> (development team)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-img">
+      <img src="case studies/terena/hero-image.png" alt="Terena homepage">
+    </div>
+
+    <div class="case-section">
+      <h2 class="case-h2">At a glance</h2>
+      <p class="case-section-body">Terena is a private specialist medical clinic in Estonia. The project replaced a standard brochure site with a new digital product structured around the clinic’s actual services, specialists and locations. The new product needed to support the clinic as it grew, while also preparing the patient journey for future integration with an external booking system.</p>
+    </div>
+
+    <div class="case-section case-glance-item">
+      <h3 class="case-h3">The challenge</h3>
+      <p class="case-section-body">Before the project, Terena operated as Tallinna Eriarstikeskus and had a simple informational website with descriptions of medical specialties, a price list and basic information about the clinic. There was no real service structure or online booking journey.</p>
+      <p class="case-section-body">The challenge was to create that structure from scratch: connect medical directions, individual services, specialists and multiple locations in a way that could grow with the clinic and later connect to an external booking platform.</p>
+      <p class="case-section-body">At the same time, Tallinna Eriarstikeskus was becoming Terena, with a new name and visual identity.</p>
+    </div>
+
+    <div class="case-section case-glance-item">
+      <h3 class="case-h3">Outcome</h3>
+      <p class="case-section-body">A new brand and digital product built around reusable page templates, a structured service offering and a scalable design system. The website is live and prepared for integration with the external booking platform.</p>
+    </div>
+
+    <div class="case-section case-glance-item">
+      <h3 class="case-h3">Project stages</h3>
+      <ol class="case-list case-list-numbered">
+        <li>Understanding the healthcare problem</li>
+        <li>Translating research findings into product principles</li>
+        <li>Structuring services, specialists and locations</li>
+        <li>Designing the path to booking</li>
+        <li>Building the brand and component system</li>
+        <li>Launch</li>
+      </ol>
+    </div>
+
+    <div class="case-section">
+      <h2 class="case-h2">Why medical websites usually fail their patients</h2>
+      <p class="case-section-body">During the research phase, it became clear that several failure patterns repeat across the healthcare category with striking consistency.</p>
+      <p class="case-section-body">Medical websites carry two obligations that tend to work against each other. The first is comprehensive clinical accuracy, since the content describes procedures with real consequences. The second is immediate comprehension for a lay reader who is often navigating the site in a state of stress. Most sites resolve this tension by defaulting to the first at the expense of the second: pages become dense, terminology remains clinical, and the patient is left to decode.</p>
+      <p class="case-section-body">A second problem is structural. The information architecture of most medical sites mirrors the organisation of the clinic itself, arranged by department, specialty, or internal hierarchy. This is coherent for the institution but foreign to the patient, who arrives with a symptom or a concern rather than a departmental preference. The two vocabularies rarely map cleanly onto each other.</p>
+
+      <div class="case-compare">
+        <div>
+          <p class="case-compare-title">Doctor</p>
+          <p class="case-compare-subtitle">Clinical language</p>
+          <ul class="case-compare-list">
+            <li><span>🧑‍⚕️</span> Dermatological evaluation</li>
+            <li><span>🧑‍⚕️</span> Gastrointestinal discomfort</li>
+            <li><span>🧑‍⚕️</span> Lumbar pain</li>
+            <li><span>🧑‍⚕️</span> Otolaryngology consultation</li>
+          </ul>
+        </div>
+        <div>
+          <p class="case-compare-title">Patient</p>
+          <p class="case-compare-subtitle">Everyday language</p>
+          <ul class="case-compare-list">
+            <li><span>🤕</span> I want to check a skin issue</li>
+            <li><span>🤕</span> My stomach hurts</li>
+            <li><span>🤕</span> My lower back hurts</li>
+            <li><span>🤕</span> Ear, nose and throat appointment</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-section">
+      <h2 class="case-h2">Design challenge</h2>
+      <p class="case-section-body">We were not redesigning an existing product structure. We had to create one. The new Terena website needed to organise a growing amount of information across medical directions, individual services, specialists and locations, while still being understandable to someone who does not know how the clinic is organised internally.</p>
+      <p class="case-section-body" id="every-page-line">Every page required the same decisions:</p>
+      <ul class="case-list case-list-plain">
+        <li><strong>What does the patient need immediately?</strong></li>
+        <li><strong>What can wait?</strong></li>
+        <li><strong>What should expand in context?</strong></li>
+        <li><strong>What actually needs its own page?</strong></li>
+      </ul>
+      <p class="case-section-body">The structure also had to work across two hospital buildings and two additional locations, and eventually connect with an external booking system that followed its own service logic.</p>
+    </div>
+
+    <div class="case-section">
+      <h2 class="case-h2">From research findings to design principles</h2>
+      <p class="case-section-body">Instead of treating every page as a separate design problem, I used a small set of principles across the product:</p>
+      <ul class="case-list">
+        <li>Patients should not need to understand the clinic’s internal structure to find the right information.</li>
+        <li>Essential information should appear before detailed medical content.</li>
+        <li>Related services should be easy to compare without opening many separate pages.</li>
+        <li>Longer information should appear only when the service genuinely requires it.</li>
+        <li>A patient’s choice should carry into booking instead of making them start again.</li>
+      </ul>
+      <p class="case-section-body">These principles became the basis for the information architecture, page templates and component system.</p>
+    </div>
+
+    <div class="case-section">
+      <h2 class="case-h2">Solution</h2>
+    </div>
+
+    <div class="case-section case-solution-item">
+      <h3 class="case-h3">1. Turning a price list into a service structure</h3>
+      <p class="case-section-body">Previously, the website mainly described broad medical specialties and provided a price list. For the new website, <strong>services needed to become part of the actual navigation and patient journey</strong>, so I structured them by medical direction and designed a system that could connect individual services with relevant specialists, locations, pricing and future booking.</p>
+      <p class="case-section-body">Related services are shown together as expandable cards. Before opening anything, the patient can already see the essential information: the service name, short explanation, price, duration, locations and booking action. More information expands directly inside the card, allowing the patient to stay in the same context while comparing services.</p>
+      <p class="case-section-body">When a procedure genuinely requires a longer explanation, the card links to a dedicated page. This means the more complex case does not define the structure for every other service.</p>
+
+      <div class="case-img">
+        <img src="case studies/terena/service-collapsed.png" alt="Service card, collapsed">
+      </div>
+
+      <div class="case-img">
+        <img src="case studies/terena/service-opened.png" alt="Service card, expanded">
+      </div>
+    </div>
+
+    <div class="case-section case-solution-item">
+      <h3 class="case-h3">2. Designing templates before designing individual pages</h3>
+      <p class="case-section-body">Terena had many services, specialists and locations, and that content would continue to grow after launch. Designing every page individually would solve the current website but make future growth difficult, so I created reusable templates for each main page type.</p>
+      <p class="case-section-body">The templates defined what information belongs on the page, its hierarchy, expected content length, what should appear first and when additional detail should be introduced. I also added placeholder copy to the templates, giving Terena’s team a practical content framework: not just <strong>what</strong> information they needed to provide, but approximately <strong>how much</strong>.</p>
+      <p class="case-section-body">Medical content itself came from the clinic. Our role was to review it from the patient’s perspective and flag places where important information was difficult to find, terminology was unnecessarily complex or the amount of text worked against the hierarchy.</p>
+
+      <div class="case-img">
+        <img src="case studies/terena/page template (1).png" alt="Page templates with placeholder content">
+      </div>
+    </div>
+
+    <div class="case-section case-solution-item">
+      <h3 class="case-h3">3. Designing booking before the integration existed</h3>
+      <p class="case-section-body">Online booking is handled by an external partner platform. The main challenge was to understand how Terena organised its services, how those same services were defined in Estonia’s medical system with their own classifications and service codes, and how the booking partner structured them on its side. We needed to find a middle ground between these systems that would still make sense to a patient: what they are choosing, what they are booking and what will happen next.</p>
+      <p class="case-section-body">I designed the user path so that a choice made on Terena could eventually carry into the booking system. If a patient chooses a specific service, that service can already be selected when the booking platform opens, allowing them to continue to a suitable time or specialist instead of searching for the same service again.</p>
+      <p class="case-section-body">Developers were involved from the structure stage to validate technical feasibility early and make sure the decisions we were making would also work with the future booking integration. The goal was not to reproduce the booking platform inside the website, but to make the transition between the two systems feel like one continuous journey.</p>
+
+      <div class="case-img">
+        <img src="case studies/terena/booking-flow.png" alt="Service selection carrying into the external booking flow">
+      </div>
+    </div>
+
+    <div class="case-section case-solution-item">
+      <h3 class="case-h3">4. Treating accessibility as part of the product</h3>
+      <p class="case-section-body">Accessibility was considered from the beginning rather than added after the UI was finished. This mattered especially in healthcare, where the audience can include older patients, people with low vision and people trying to understand unfamiliar information while already under cognitive or emotional stress.</p>
+      <p class="case-section-body">The interface uses clear hierarchy, readable typography, predictable interaction patterns and accessible contrast. Progressive disclosure also helps here: the patient can find the main information first instead of processing a full medical description before understanding the service.</p>
+    </div>
+
+    <div class="case-section case-solution-item">
+      <h3 class="case-h3">5. Building a new identity together with the product</h3>
+      <p class="case-section-body">The website was created alongside a complete transition from Tallinna Eriarstikeskus to Terena. The new name was developed together with the founders, while marketing and brand specialists worked on the wider brand strategy. I designed the visual identity, including the logo, colour palette and typography, and translated it into the digital product.</p>
+      <p class="case-section-body">The visual direction uses soft greens and light lilac tones instead of the cold visual language common in healthcare. Photography focuses on real people and warmer environments, and where possible, service pages also show the equipment patients will encounter during a procedure. The brand and product were therefore developed as parts of the same experience rather than as two separate layers.</p>
+
+      <div class="case-img">
+        <img src="case studies/terena/logo.png?v=2" alt="Terena logo">
+      </div>
+
+      <div class="case-img">
+        <img src="case studies/terena/terena2.png" alt="Terena brand and photography">
+      </div>
+    </div>
+
+    <div class="case-section">
+      <h2 class="case-h2">What was built</h2>
+      <ul class="case-list">
+        <li>Information architecture and user flows across the full site</li>
+        <li>Reusable page templates with content structure and guidelines</li>
+        <li>Service structure with expandable content and clear relationships between services, specialists and locations</li>
+        <li>A booking journey designed to carry the patient’s choices into the external booking platform</li>
+        <li>Complete responsive UI, design system and developer handoff, with developers involved throughout implementation</li>
+      </ul>
+      <p class="case-section-body">Tallinna Eriarstikeskus evolved from a simple informational website and price list into a new brand and a structured digital service connecting medical directions, services, specialists and locations.</p>
+    </div>
+
+  </div>
+
+  <!-- ─── Footer ──────────────────────────────────────────────────── -->
+  <footer class="case-footer">
+    <p>© 2026 Jekaterina Senina</p>
+  </footer>
+
+  <script src="header.js" data-state="back"></script>
+</body>
+</html>

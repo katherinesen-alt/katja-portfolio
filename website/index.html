@@ -371,26 +371,31 @@
       .way-card-title { font-size: 22px !important; }
       .way-card-tagline { margin-bottom: 24px !important; }
       .way-card-tags { margin-bottom: 32px !important; }
+
+      /* Selected brands — mobile */
+      #selected-brands { padding: 40px 0 !important; }
+      #selected-brands .section-title { padding: 0 20px !important; margin: 0 0 40px !important; }
     }
 
-    /* ── Selected work: case-study grid (2-up feature, then 3-up) ── */
+    /* ── Selected work: case-study grid, 2-up throughout ── */
     .work-feature {
       display: grid; grid-template-columns: 1fr 1fr;
       column-gap: 48px; row-gap: 80px; margin-bottom: 80px;
     }
     .work-rest {
-      display: grid; grid-template-columns: repeat(3, 1fr);
+      display: grid; grid-template-columns: 1fr 1fr;
       column-gap: 48px; row-gap: 80px;
     }
     .work-card { display: block; text-decoration: none; color: inherit; }
     .work-card .thumb {
-      position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 0;
+      position: relative; aspect-ratio: 3 / 2; overflow: hidden; border-radius: 0;
       background: #e7e7df; display: flex; align-items: center; justify-content: center;
     }
     .work-card img, .work-card video {
       width: 100%; height: 100%; object-fit: cover; object-position: center;
       display: block; transition: transform 600ms cubic-bezier(0.16,1,0.3,1);
     }
+    .work-card video.video-fit { object-fit: contain; background: #F5F5F5; }
     .work-card:hover img, .work-card:hover video { transform: scale(1.03); }
     .work-card .tags {
       font-size: 13px; font-weight: 400; color: #999; letter-spacing: 0.02em;
@@ -423,9 +428,6 @@
       to { transform: translateX(-50%); }
     }
 
-    @media (max-width: 980px) {
-      .work-rest { grid-template-columns: 1fr 1fr; }
-    }
     @media (max-width: 640px) {
       .work-feature, .work-rest { grid-template-columns: 1fr; gap: 48px; margin-bottom: 48px; }
     }
@@ -441,18 +443,18 @@
       <h1 class="hero-typing">
         <span class="static-text">I'm </span><span id="typed"></span><span class="cursor"></span>
       </h1>
-      <p class="hero-sub">Designing digital products that make complex systems clear, useful, and easy to navigate.</p>
+      <p class="hero-sub">I design digital products from research and product structure to clear web and mobile experiences.</p>
     </div>
   </section>
 
   <!-- Tags layer — covers entire page -->
   <div id="tags-layer" style="position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:5;">
-    <div class="tag" style="pointer-events:auto;">Complex Products</div>
-    <div class="tag" style="pointer-events:auto;">Data-Driven Products</div>
-    <div class="tag" style="pointer-events:auto;">SaaS Interfaces</div>
     <div class="tag" style="pointer-events:auto;">Design Systems</div>
-    <div class="tag" style="pointer-events:auto;">Expert Reviews</div>
-    <div class="tag" style="pointer-events:auto;">Mission-Critical Software</div>
+    <div class="tag" style="pointer-events:auto;">Complex Products</div>
+    <div class="tag" style="pointer-events:auto;">SaaS</div>
+    <div class="tag" style="pointer-events:auto;">Native Mobile</div>
+    <div class="tag" style="pointer-events:auto;">UX Research</div>
+    <div class="tag" style="pointer-events:auto;">Interaction Design</div>
   </div>
 
   <!-- Drag hint — fades in once the pills settle, gone for good on first throw -->
@@ -473,30 +475,36 @@
     <!-- First two: large 2-up -->
     <div class="work-feature">
       <a href="case-mcs.html" class="reveal work-card">
-        <div class="thumb"><img src="case studies/mcs/mcs-cover.jpg" alt="Spaceit MCS"></div>
+        <div class="thumb"><video class="video-fit" src="case studies/mcs/homepage-video.mp4" autoplay loop muted playsinline></video></div>
         <p class="tags">SaaS, Design System</p>
-        <p class="headline">Spaceit MCS. Full product design of a cloud-based satellite mission control platform.</p>
+        <p class="headline">Spaceit MCS: Turning fragmented satellite operations into one platform for real missions</p>
       </a>
 
-      <a href="case-mcs-design-system.html" class="reveal work-card">
-        <div class="thumb"><img src="case studies/ds/ds-cover.png?v=2" alt="MCS Design System"></div>
-        <p class="tags">Design System, SaaS</p>
-        <p class="headline">Spaceit MCS Design System.</p>
+      <a href="case-terena.html" class="reveal work-card">
+        <div class="thumb"><img src="case studies/terena/terena-cover.png" alt="Terena"></div>
+        <p class="tags">Healthcare, Design Systems</p>
+        <p class="headline">Terena. Turning a traditional specialist clinic into a digital service</p>
       </a>
     </div>
 
     <!-- The rest: 3-up -->
     <div class="work-rest">
+      <a href="case-mcs-design-system.html" class="reveal work-card">
+        <div class="thumb"><img src="case studies/ds/ds-cover.png?v=2" alt="MCS Design System"></div>
+        <p class="tags">Design System, SaaS</p>
+        <p class="headline">Spaceit MCS Design System: Building one system for an evolving mission-control product</p>
+      </a>
+
       <a href="case-pleier.html" class="reveal work-card">
         <div class="thumb"><img src="case studies/pleier/pleier-cover.jpg" alt="PLEIER"></div>
         <p class="tags">Lifestyle, Mobile App</p>
-        <p class="headline">Pleier - audio app for Postimees, one of the largest media groups in the Baltics.</p>
+        <p class="headline">Pleier for Postimees Grupp — one app for radio and podcasts</p>
       </a>
 
       <a href="case-soundfr.html" class="reveal work-card">
         <div class="thumb"><video src="case studies/soundfr/intro.mp4" autoplay loop muted playsinline></video></div>
         <p class="tags">Healthcare, AI Tools, Mobile App</p>
-        <p class="headline">Designing the MVP mobile experience for a smart hearing device</p>
+        <p class="headline">Designing a speech-to-text MVP for a smart hearing device in three days</p>
       </a>
 
       <a href="case-sqence.html" class="reveal work-card">
@@ -505,17 +513,25 @@
         <p class="headline">SQENCE. A real-time social network built on one rule: post first, see after.</p>
       </a>
 
+      <!-- Hidden on 2026-09-10. The case page itself is untouched;
+           delete these two comment markers to bring the card back. -->
+      <!--
       <a href="case-ecommerce.html" class="reveal work-card">
         <div class="thumb"><img src="toimib1.jpg" alt="Toimib e-commerce"></div>
         <p class="tags">E-Commerce, Web Design, MVP</p>
         <p class="headline">A full e-commerce experience for a platform with verified products.</p>
       </a>
+      -->
 
+      <!-- Hidden on 2026-09-10. The case page itself is untouched;
+           delete these two comment markers to bring the card back. -->
+      <!--
       <a href="case-spaceit-web.html" class="reveal work-card">
         <div class="thumb"><img src="case studies/spaceit web/spaceit-web-cover.jpg" alt="Spaceit Website"></div>
         <p class="tags">SaaS, Web Design</p>
         <p class="headline">Spaceit website redesign. Rebuilding the public face of a space-tech startup.</p>
       </a>
+      -->
     </div>
 
   </section>
