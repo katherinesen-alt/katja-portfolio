@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Who keeps the AI in line? A design system</title>
+  <link rel="stylesheet" href="fonts.css">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+    body { font-family: 'Onest', system-ui, sans-serif; background: #ffffff; color: #040002; }
+
+    .case { max-width: 1080px; margin: 0 auto; padding: 0 48px 80px; }
+
+    /* Header */
+    .case-header { padding-top: 136px; padding-bottom: 0; }
+    .case-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 24px;
+    }
+    .case-hero-text {
+      font-size: clamp(32px, 4.5vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      color: #040002;
+      max-width: 900px;
+    }
+
+    /* Meta rows */
+    .case-meta-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 32px;
+    }
+    .case-meta-item {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      padding: 10px 0;
+    }
+    .case-meta-label {
+      font-size: 13px;
+      font-weight: 400;
+      color: #999;
+      width: 140px;
+      flex-shrink: 0;
+    }
+    .case-meta-value {
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: #040002;
+    }
+
+    /* Image placeholder */
+    .case-img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #f0f0f0;
+      border-radius: 0;
+      margin-top: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .case-img span {
+      font-size: 14px;
+      font-weight: 400;
+      color: #bbb;
+    }
+
+    /* Lead heading */
+    .case-statement {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      color: #040002;
+      margin-top: 64px;
+      max-width: 720px;
+    }
+
+    /* Sections */
+    .case-section {
+      margin-top: 64px;
+      padding-top: 0;
+    }
+    .case-section-body {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: #444;
+      max-width: 720px;
+    }
+    .case-section-body + .case-section-body { margin-top: 24px; }
+    .case-statement + .case-section { margin-top: 24px; }
+    .case-section-heading {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      color: #040002;
+      margin-top: 48px;
+      margin-bottom: 24px;
+      max-width: 720px;
+    }
+    .case-section-heading:first-child { margin-top: 0; }
+    .case-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 32px 24px;
+      max-width: 900px;
+      margin-top: 56px;
+    }
+    .case-stats { border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5; padding: 48px 0; margin-top: 72px; max-width: none; }
+    .case-stats + .case-statement { margin-top: 88px; }
+    .case-stats { grid-template-columns: 1fr 1fr 1fr 1.45fr; }
+    .case-stat-value { white-space: nowrap; }
+    .case-stat-value {
+      display: block;
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(38px, 4vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: #1E35FF;
+    }
+    .case-stat-label {
+      display: block;
+      margin-top: 12px;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.4;
+      color: #444;
+    }
+
+    .case-quote {
+      font-size: 16px;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.6;
+      color: #444;
+      border-left: 2px solid #1E35FF;
+      padding-left: 20px;
+      margin-top: 24px;
+      max-width: 720px;
+    }
+    .case-quote + .case-quote { margin-top: 24px; }
+    .case-quote + .case-section-body { margin-top: 24px; }
+    .case-section .case-img { margin-top: 32px; }
+    .case-section .case-img + .case-section-body { margin-top: 32px; }
+    .case-section > div[style*="margin-top"] { margin-top: 32px !important; }
+    .case-section > div[style*="margin-top"] + .case-section-body { margin-top: 32px; }
+    .case-section > img + .case-section-body,
+    .case-section > video + .case-section-body { margin-top: 32px; }
+    .case-closing { margin-top: 64px; }
+
+    /* Footer */
+    .case-footer {
+      padding: 40px 48px;
+      text-align: center;
+    }
+    .case-footer p {
+      font-size: 13px;
+      font-weight: 300;
+      color: #999;
+    }
+
+    /* ── Mobile ────────────────────────────────── */
+    @media (max-width: 768px) {
+      .case { padding: 0 20px 60px; }
+      .case-header { padding-top: 124px; padding-bottom: 0; }
+      .case-meta-item { gap: 12px; padding: 8px 0; }
+      .case-meta-label { width: 88px; font-size: 13px; }
+      .case-meta-value { font-size: 13px; }
+      .case-statement { font-size: 22px; line-height: 1.25; margin-top: 40px; }
+      .case-section { margin-top: 40px; }
+      .case-section-body { font-size: 16px; line-height: 1.6; }
+      .case-section-heading { font-size: 22px; margin-top: 32px; margin-bottom: 20px; }
+      .case-section-body + .case-section-body { margin-top: 20px; }
+      .case-quote { font-size: 16px; padding-left: 16px; margin-top: 20px; }
+      .case-quote + .case-quote { margin-top: 20px; }
+      .case-quote + .case-section-body { margin-top: 20px; }
+      .case-img { margin-top: 40px; }
+      .case-stats { grid-template-columns: 1fr 1fr; gap: 28px 20px; margin-top: 40px; }
+      .case-stat-value { font-size: 34px; }
+      .case-section .case-img { margin-top: 24px; }
+      .case-section .case-img + .case-section-body { margin-top: 24px; }
+      .case-section > div[style*="margin-top"] { margin-top: 24px !important; }
+      .case-section > div[style*="margin-top"] + .case-section-body { margin-top: 24px; }
+      .case-section > img + .case-section-body,
+      .case-section > video + .case-section-body { margin-top: 24px; }
+      .case-closing { margin-top: 40px; }
+
+      #site-header { padding: 14px 20px !important; }
+      #site-header a { font-size: 14px !important; }
+      #site-header a[href*="tally.so"] {
+        height: 40px !important;
+        padding: 0 18px !important;
+        font-size: 14px !important;
+      }
+      .case-footer { padding: 32px 20px; }
+    }
+  
+    /* Slycora case additions */
+    .fig { margin-top: 32px; }
+    .fig img { width: 100%; height: auto; display: block; }
+    .fig figcaption { font-size: 14px; font-weight: 300; line-height: 1.5; color: #666; margin-top: 12px; max-width: 720px; }
+    .fig-trio { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; margin-top: 32px; }
+    .fig-trio .fig { margin-top: 0; }
+    .fig .frame { border: 1px solid #ececec; }
+    .case-stat-label small { display:block; margin-top:6px; font-size:13px; color:#888; }
+
+    .case-list { list-style: none; max-width: 720px; margin-top: 24px; }
+    .case-list li { position: relative; padding-left: 22px; font-size: 16px; font-weight: 300; line-height: 1.65; color: #444; }
+    .case-list li + li { margin-top: 10px; }
+    .case-list li::before { content: "\2022"; position: absolute; left: 4px; color: #999; }
+    .case-list strong { font-weight: 600; color: #040002; }
+
+    .who { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; max-width: 900px; }
+    .who > div { background: #f6f6f7; border-radius: 12px; padding: 28px; }
+    .who > div:last-child { grid-column: 1 / -1; }
+    .who h4 { font-size: 18px; font-weight: 700; color: #040002; margin-bottom: 8px; }
+    .who > div:last-child p { max-width: 720px; }
+    .who p { font-size: 16px; font-weight: 300; line-height: 1.6; color: #444; }
+
+    pre.code { background: #f6f6f7; border-radius: 8px; padding: 20px 24px; margin-top: 24px; max-width: 900px; overflow-x: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; line-height: 1.6; color: #1d1d1f; }
+    .code-note { font-size: 14px; font-weight: 300; color: #666; margin-top: 10px; max-width: 720px; }
+
+    .flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 32px; max-width: 900px; }
+    .flow div { background: #f6f6f7; border-radius: 8px; padding: 16px; font-size: 14px; line-height: 1.45; color: #444; position: relative; }
+    .flow div b { display: block; font-size: 18px; font-weight: 700; color: #040002; margin-bottom: 4px; }
+    .flow div:nth-child(1), .flow div:nth-child(2), .flow div:nth-child(3) { }
+    .flow-note { font-size: 14px; font-weight: 300; color: #666; margin-top: 12px; max-width: 720px; }
+
+    .steps { list-style: none; counter-reset: s; max-width: 720px; margin-top: 24px; }
+    .steps li { counter-increment: s; position: relative; padding-left: 28px; font-size: 16px; font-weight: 300; line-height: 1.65; color: #444; }
+    .steps li + li { margin-top: 20px; }
+        .steps li::before { content: counter(s) "."; position: absolute; left: 0; color: #999; }
+    .steps strong { font-weight: 600; color: #040002; }
+
+    /* The one inverted band */
+    .band { background: #040002; color: #fff; padding: 80px 0 88px; margin-top: 0; }
+    .band-inner { max-width: 1080px; margin: 0 auto; padding: 0 48px; }
+    .band .case-section-heading { color: #fff; margin-top: 0; }
+    .band .case-section-body { color: #c9c9cf; }
+    .band .case-statement { color: #fff; margin-top: 0; }
+    .rule { margin-top: 32px; max-width: 900px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 24px 40px; padding-top: 28px; border-top: 1px solid #2c2a30; }
+    .rule q { quotes: none; display: block; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 14px; line-height: 1.6; color: #fff; }
+    .rule p { font-size: 16px; font-weight: 300; line-height: 1.6; color: #c9c9cf; }
+    .rule p b { font-weight: 600; color: #fff; }
+    .band .code-note { color: #9a9aa2; }
+    
+    .proof { width: 100%; max-width: 900px; border-collapse: collapse; margin-top: 32px; }
+    .proof th, .proof td { text-align: left; vertical-align: top; padding: 16px 20px 16px 0; border-top: 1px solid #e5e5e5; font-size: 15px; line-height: 1.55; font-weight: 300; color: #444; }
+    .proof th { font-weight: 600; color: #040002; width: 170px; }
+    .proof tr:last-child td, .proof tr:last-child th { border-bottom: 1px solid #e5e5e5; }
+    .proof td b { font-weight: 600; color: #040002; }
+
+    @media (max-width: 768px) {
+      .phones, .fig-trio, .who { grid-template-columns: 1fr; }
+      .flow { grid-template-columns: 1fr 1fr; }
+      .band { padding: 56px 0 64px; margin-top: 0; }
+      .band-inner { padding: 0 20px; }
+      .rule { grid-template-columns: 1fr; gap: 12px; }
+      .proof th { width: 110px; padding-right: 12px; }
+      .proof th, .proof td { font-size: 14px; }
+      pre.code { padding: 16px; font-size: 12px; }
+    }
+
+
+    .phones { display: grid; grid-template-columns: repeat(2, 340px); gap: 40px; justify-content: start; margin: 64px 0 0; }
+    .phones .fig { margin-top: 0; }
+    .phones figcaption { max-width: none; }
+    @media (max-width: 768px) { .anat-pair { grid-template-columns: 1fr 1fr; gap: 16px; } .phones { grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; } .phones figcaption { font-size: 13px; } }
+        .anat-pair { display: grid; grid-template-columns: 280px 280px; gap: 24px; margin-top: 20px; align-items: start; }
+    .anat-pair img { margin-top: 0; }
+    .anat { margin-top: 40px; max-width: 828px; }
+    .anat h4 { font-size: 18px; font-weight: 700; color: #040002; margin-bottom: 6px; }
+    .anat p { font-size: 16px; font-weight: 300; line-height: 1.6; color: #444; max-width: 720px; }
+    .anat img { width: 100%; height: auto; display: block; margin-top: 20px; box-sizing: border-box; padding: 24px; background: #f6f6f7; border-radius: 12px; }
+    .anat-pair div { }
+    .anat-pair h5 { font-size: 16px; font-weight: 700; color: #040002; margin-top: 16px; }
+    .anat-pair h5 + p { font-size: 14px; color: #666; margin-top: 2px; }
+  </style>
+  <style>
+    html.locked .case, html.locked .band, html.locked .case-footer { display: none; }
+    #gate { display: none; }
+    html.locked #gate { display: flex; min-height: 100vh; align-items: center; justify-content: center; padding: 24px; }
+    #gate form { width: 100%; max-width: 380px; }
+    #gate h1 { font-family: 'Fraunces', Georgia, serif; font-size: 28px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; color: #040002; }
+    #gate p { font-size: 16px; font-weight: 300; line-height: 1.6; color: #444; margin-top: 12px; }
+    #gate input { width: 100%; margin-top: 24px; height: 52px; padding: 0 16px; font: inherit; font-size: 16px; color: #040002; border: 1px solid #d9d9de; border-radius: 8px; background: #fff; outline: none; }
+    #gate input:focus { border-color: #1E35FF; }
+    #gate button { margin-top: 12px; height: 52px; width: 100%; border: 0; border-radius: 9999px; background: #040002; color: #fff; font: inherit; font-size: 16px; font-weight: 500; cursor: pointer; }
+    #gate button:hover { background: #1E35FF; }
+    #gate .err { color: #c4271c; font-size: 14px; margin-top: 10px; min-height: 20px; }
+  </style>
+  <script>
+    (function () {
+      try { if (sessionStorage.getItem('slycora-case') === 'b04702f10abca4ee5d9463dfc5648431b11d0d5e9f04300cd0a4160cc9ba191b') return; } catch (e) {}
+      document.documentElement.classList.add('locked');
+    })();
+  </script>
+</head>
+
+<body>
+
+  <div id="gate">
+    <form id="gate-form" autocomplete="off">
+      <h1>This case is private</h1>
+      <p>Enter the password to read it.</p>
+      <input id="gate-input" type="password" placeholder="Password" aria-label="Password" autofocus>
+      <button type="submit">Open</button>
+      <div class="err" id="gate-err" role="alert"></div>
+    </form>
+  </div>
+  <script>
+    (function () {
+      var HASH = 'b04702f10abca4ee5d9463dfc5648431b11d0d5e9f04300cd0a4160cc9ba191b';
+      var form = document.getElementById('gate-form');
+      if (!form) return;
+      function hex(buf) { return Array.prototype.map.call(new Uint8Array(buf), function (b) { return ('0' + b.toString(16)).slice(-2); }).join(''); }
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var v = document.getElementById('gate-input').value.trim();
+        crypto.subtle.digest('SHA-256', new TextEncoder().encode(v)).then(function (buf) {
+          if (hex(buf) === HASH) {
+            try { sessionStorage.setItem('slycora-case', HASH); } catch (err) {}
+            document.documentElement.classList.remove('locked');
+          } else {
+            document.getElementById('gate-err').textContent = 'Wrong password. Try again.';
+          }
+        });
+      });
+    })();
+  </script>
+
+  <!-- header injected by header.js (state=back) -->
+
+  <div class="case">
+
+    <div class="case-header">
+      <h1 class="case-hero-text">Who keeps the AI in line? A design system</h1>
+      <div class="case-meta-row">
+        <div class="case-meta-item">
+          <span class="case-meta-label">Type</span>
+          <span class="case-meta-value">Design System, iOS app, AI-assisted development</span>
+        </div>
+        <div class="case-meta-item">
+          <span class="case-meta-label">Role</span>
+          <span class="case-meta-value">Sole Product Designer, designing and shipping the code with Claude Code</span>
+        </div>
+        <div class="case-meta-item">
+          <span class="case-meta-label">Scope</span>
+          <span class="case-meta-value">Tokens, component library, documentation, decision log, rules for AI</span>
+        </div>
+        <div class="case-meta-item">
+          <span class="case-meta-label">Status</span>
+          <span class="case-meta-value">In daily use. The app is available for download.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phones">
+      <figure class="fig">
+        <img src="case studies/slycora/phone-now.png" alt="Slycora Now screen with the Mark done button">
+        <figcaption>The Now screen: one task, one main action.</figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="case studies/slycora/phone-timeline.png" alt="Agenda timeline as shown in the library">
+        <figcaption>The Agenda timeline, the example later on this page.</figcaption>
+      </figure>
+    </div>
+
+    <div class="case-stats">
+      <div><span class="case-stat-value">11 to 1</span><span class="case-stat-label">button styles became one component<small>from my audit of the original app</small></span></div>
+      <div><span class="case-stat-value">94 to 1</span><span class="case-stat-label">different spacing values became one 4 and 8 scale<small>from the same audit</small></span></div>
+      <div><span class="case-stat-value">7 to 3</span><span class="case-stat-label">animation durations became three speeds<small>from the same audit</small></span></div>
+      <div><span class="case-stat-value">330 to 29 <span style="font-size:.4em;letter-spacing:0">KB</span></span><span class="case-stat-label">decision log, cut from a record of every step to only the decisions and the reasons behind them<small>a rule for the AI keeps it that short</small></span></div>
+    </div>
+
+    <p class="case-statement">I designed the rules once, and both the interface and the AI follow them.</p>
+
+    <div class="case-section">
+      <p class="case-section-body">Slycora is a day planner for people with ADHD. The iOS app was already working when I started, but it had grown screen by screen. Buttons, spacing and colors were repeated in slightly different ways, and I had no shared place to describe them.</p>
+      <p class="case-section-body">I built that place. It is a token file, a component library in code, a library website and a decision log. Then I wrote the rules that tell Claude Code how to work inside it. I don't write Swift, Claude Code does. The system is how I tell it what to build.</p>
+    </div>
+
+    <div class="case-section">
+      <h3 class="case-section-heading">Who does what</h3>
+      <p class="case-section-body">I am the only designer. I designed the system, built the library, and shipped design changes into the app through Claude Code. I also use AI for audits, research and the decision log, but every decision and every approval is mine.</p>
+      <div class="who">
+        <div><h4>Me</h4><p>System architecture, tokens, components, library pages, rules for AI, the decision log, and the design work in the app itself.</p></div>
+        <div><h4>Claude Code</h4><p>Writes the Swift, HTML and CSS, runs the build script, and updates the library and logs, working inside the rules in CLAUDE.md.</p></div>
+        <div><h4>Developers</h4><p>The developers and the architecture engineer own the backend and the technical side. They review and approve my changes. They also set up the library's domain and sign-in. For them the library is a reference, and none of their code depends on it yet.</p></div>
+      </div>
+    </div>
+
+    <div class="case-section">
+      <h3 class="case-section-heading">One source of truth, and it is the code</h3>
+      <p class="case-section-body">This project has no Figma file, by design. In my earlier work the Figma library was the source of truth and the code followed it. Here the order is reversed: the source of truth is the live code. The library reads its snippets straight from the app's Swift files on every build, so it cannot drift from the product. A design file can.</p>
+
+      <div class="flow">
+        <div><b>Tokens</b>Three JSON layers: raw colors, roles, foundations</div>
+        <div><b>build.py</b>One script, run after every change</div>
+        <div><b>Two outputs</b>CSS for the library, SlycoraTokens.swift for the app</div>
+        <div><b>Components</b>27 Swift files in the components folder, each mirrored in HTML</div>
+      </div>
+      <p class="flow-note">Generated files are never edited by hand.</p>
+
+      <p class="case-section-body" style="margin-top:40px">Tokens work in three layers. The first holds raw values: eight neutrals, iOS colors, and four brand colors in five steps each. The second holds roles such as text, background, border, action, status, effort and tile. Each role points to a raw value for light and for dark mode. The third holds foundations: type styles, spacing, radii, shadows and motion. Components may use roles only. This is the rule that lets the interface be recolored without touching components.</p>
+
+<pre class="code">// tokens/semantic.json
+"text": {
+  "secondary": { "light": "neutral.700", "dark": "neutral.700",
+                 "opacity": 0.75, "usage": "Captions and explanations" }
+}
+
+// generated into SlycoraTokens.swift
+static let textSecondary = dynamic(light: 0x171717, lightAlpha: 0.75,
+                                   dark: 0xFFFFFF, darkAlpha: 0.75)</pre>
+      <p class="code-note">A role in the token file, and the Swift constant that build.py generates from it.</p>
+
+      <p class="case-section-body" style="margin-top:40px">Components follow one rule: something becomes a component only if it repeats, has states, and iOS does not provide it. Otherwise it is a style or a native element. The Button is the clearest case. The original app had eleven button styles. Now there is one component with two independent settings, importance (Primary, Secondary, Tertiary) and meaning (Default, Success, Danger, Warning), plus size, icon and loading.</p>
+
+<pre class="code">struct SlycoraButton: View {
+    enum Kind { case primary, secondary, tertiary }
+    enum Tone { case `default`, success, danger, warning }
+    enum Size { case large, small }
+    ...
+}</pre>
+      <p class="code-note">From SlycoraButton.swift. The comment above it says: "Colors come only from the semantic roles in SlycoraTokens.Colors."</p>
+
+      <p class="case-section-body" style="margin-top:40px">The library is a website with a page for every component, and all pages are built the same way. Here is one of them taken apart. Every image below is a screenshot of the library.</p>
+
+      <div class="anat">
+        <h4>Menu and submenu</h4>
+        <p>The menu on the left leads to any page, grouped by type of element: Foundations, Bars, Controls, Content, Widgets, Containers, Native iOS and Screens. The submenu on the right is the outline of the current page and jumps to any variant.</p>
+        <div class="anat-pair">
+          <div><img src="case studies/slycora/lib-sidebar.png" alt="Library menu on the left"></div>
+          <div><img src="case studies/slycora/lib-toc.png" alt="Library submenu on the right"></div>
+        </div>
+      </div>
+
+      <div class="anat">
+        <h4>The top of a page</h4>
+        <p>The name, one line about what the component is for, and its name in the code. Here, the Agenda timeline page.</p>
+        <img src="case studies/slycora/lib-header.png" alt="Library page header for the Agenda timeline">
+      </div>
+      <div class="anat">
+        <h4>The component code</h4>
+        <p>The full Swift file of the component, read from the app on every build, with a Copy button. The doc comment at the top is the rule for using it.</p>
+        <img src="case studies/slycora/lib-code.png" alt="Component code block with the Swift file of the Button">
+      </div>
+      <div class="anat">
+        <h4>Variants</h4>
+        <p>Each variant has a preview in all its states and a short snippet that shows how to use it.</p>
+        <img src="case studies/slycora/lib-variant.png" alt="Primary large button with states and a code snippet">
+      </div>
+      <div class="anat">
+        <h4>Parameters</h4>
+        <p>Every parameter of the component with its type, default value and meaning.</p>
+        <img src="case studies/slycora/lib-params.png" alt="Table of Button parameters">
+      </div>
+      <div class="anat">
+        <h4>Made of</h4>
+        <p>The tokens and components it is built from, for example color.action.primary for the fill.</p>
+        <img src="case studies/slycora/lib-madeof.png" alt="Made of table with tokens">
+      </div>
+      <div class="anat">
+        <h4>Used in</h4>
+        <p>Where the component appears in the app. This list is generated by scanning the Swift code.</p>
+        <img src="case studies/slycora/lib-usedin.png" alt="Used in list with screens">
+      </div>
+
+      <p class="case-section-body" style="margin-top:48px">The brand lives in the same library. Instead of a separate brandbook, the brand guidelines sit next to the components, and every brand asset is available for download.</p>
+      <div class="anat"><img style="margin-top:0" src="case studies/slycora/lib-assets.png" alt="Library Assets page with logos ready to download"></div>
+      <p class="code-note">From the library, Assets page.</p>
+    </div>
+
+    <div class="case-section">
+      <h3 class="case-section-heading">From a request to a screen</h3>
+      <p class="case-section-body">Every change starts as a request in plain words: a screen, a behavior or a value I want different. Here is one about the Agenda, translated and edited for clarity:</p>
+      <p class="case-quote">Add a time view to Agenda: one day at a time, as time slots, based on the reference [image]. Keep our style and leave out the extra details from the reference. The height of each slot must match the duration of its task. Also replace the plus buttons in Agenda with the style from the second reference [image].</p>
+      <p class="case-section-body" style="margin-top:32px">Claude Code asks questions about its plan before it writes any code. Then it reads the rules in CLAUDE.md and makes the change in the app's Swift code and, when a token is involved, in the token files. It runs build.py, which regenerates the library's CSS and SlycoraTokens.swift from the same tokens, and updates the library page and the decision log. Finally it reports what changed in the app and in the library. I review the result in the simulator and in the library, and either approve it or send the next request.</p>
+      <p class="case-section-body">In the library, this request produced a new Agenda timeline page with variants: normal, Focus, a task without time, time that has passed, and a calendar event. The Day header page was updated, and the code and the used-in lists were regenerated from the Swift files. process.md got an entry with the reason for a timeline and the options I rejected: a full week grid, a List and Timeline segmented switch, and long empty hours.</p>
+
+      <div class="anat" style="margin-top:32px"><img style="margin-top:0" src="case studies/slycora/lib-timeline-variant.png" alt="Library page for the Agenda timeline with a preview and the snippet"></div>
+      <p class="code-note">The new library page: a live preview of the variant and the snippet that shows how to place it.</p>
+
+    </div>
+
+  </div>
+
+  <div class="band">
+    <div class="band-inner">
+      <h3 class="case-section-heading">Rules for AI: how I keep it from averaging my work</h3>
+      <p class="case-section-body">A language model takes everything it knows and averages it into what it thinks is the best option. This is why AI design and AI text so often look the same. I wanted the opposite: work done the way I do it, in my style, inside the brand and common UX practice. These rules did not come from one mistake. They come from my experience of working with LLMs, and everything else stands on them.</p>
+      <p class="case-section-body">Claude Code reads one Markdown file, CLAUDE.md, before it works. I use it to say what the system is, where its source of truth lives, and what the AI must ask me before it acts.</p>
+
+      <div class="rule">
+        <q>Tokens are stored only in design/library/tokens. CSS and Swift files are created from it by a script, I do not edit them by hand.</q>
+        <p><b>Prevents</b> values that drift apart. The AI cannot fix a color in one screen and leave the library different.</p>
+      </div>
+      <div class="rule">
+        <q>Components use only roles from semantic.json, not palettes directly.</q>
+        <p><b>Prevents</b> hard-coded colors. A role can be changed once for the whole app. A raw color cannot.</p>
+      </div>
+      <div class="rule">
+        <q>When I change a component, change it in two places: in Swift in the sandbox and in HTML in the library. They must always look the same. After changes, remind me what changed in both places.</q>
+        <p><b>Prevents</b> a library that stops matching the app. This happened several times before the rule existed: previews no longer matched the real screen.</p>
+      </div>
+      <div class="rule">
+        <q>Before a big change, say briefly what you are going to change and wait for my ok. Do not change work with the server and data without my explicit request.</q>
+        <p><b>Prevents</b> surprise rewrites, and changes to server and data work, which is not part of a design task.</p>
+      </div>
+      <div class="rule">
+        <q>In process.md keep only important product decisions. Write why it was accepted. If a decision changes, edit the existing entry, do not add a new one at the end.</q>
+        <p><b>Prevents</b> a log nobody can read. The old log had grown to 330 KB and 152 sections. I cut it down, and this rule keeps it short.</p>
+      </div>
+      <div class="rule">
+        <q>Run git only when I ask. Push only to a separate branch, never to main.</q>
+        <p><b>Prevents</b> anything reaching a shared repository without me knowing.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="case">
+
+    <div class="case-section">
+      <h3 class="case-section-heading">What works and where it goes next</h3>
+      <p class="case-section-body">I use the library every day and work in the iOS simulator, so I see the result of my decisions at once. I can tell right away what is technically impossible, and I no longer spend time on prototypes. The work became easier for me and for the developers, and noticeably faster, because I describe a change once and it reaches the app, the library and the log together.</p>
+
+
+      <p class="case-section-body">What I want to build next is a living system: the AI itself notices that something needs fixing and sends me reports, or requests when my judgment is needed.</p>
+    </div>
+
+  </div>
+
+  <footer class="case-footer">
+    <p>© 2026 Jekaterina Senina</p>
+  </footer>
+
+  <script src="header.js" data-state="back"></script>
+</body>
+</html>
